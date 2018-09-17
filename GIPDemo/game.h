@@ -1,15 +1,15 @@
 #pragma once
-#include <iostream>
+#include "Textures.h"
+
 class game
 {
 private:
-
+	ALLEGRO_DISPLAY *display;
 public:
 	void init();
 	void startMain();
 	void render();
-	void draw();
+	void update();
 	game();
 	~game();
 };
-
