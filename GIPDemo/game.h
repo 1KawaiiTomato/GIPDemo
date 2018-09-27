@@ -4,6 +4,7 @@
 class game
 {
 private:
+	Textures textures;
 	ALLEGRO_DISPLAY *display;
 public:
 	void init();

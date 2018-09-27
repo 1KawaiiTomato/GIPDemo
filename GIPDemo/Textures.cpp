@@ -1,6 +1,5 @@
 #include "Textures.h"
 
-/*
 void Textures::loadTexturesFromAtlas(std::string s)
 {
 	tinyxml2::XMLDocument xmlDoc;
@@ -17,4 +16,11 @@ void Textures::loadTexturesFromAtlas(std::string s)
 		Textures::textures[name] = al_create_sub_bitmap(atlas, x, y, w, h);
 	}
 }
-*/
+
+Textures::Textures()
+{
+}
+
+Textures::~Textures()
+{
+}
