@@ -1,5 +1,7 @@
 #pragma once
 #include "allegro5/allegro.h"
+#include "Textures.h"
+
 class Entity
 {
 public:

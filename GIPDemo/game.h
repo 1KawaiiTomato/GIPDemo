@@ -1,11 +1,17 @@
 #pragma once
-#include "Textures.h"
+#include "World.h"
 
 class game
 {
 private:
+	bool running;
+	ALLEGRO_COLOR BLACK;
 	Textures textures;
+	ALLEGRO_EVENT_QUEUE *EQ;
 	ALLEGRO_DISPLAY *display;
+	World world;
+	void register_event_sources();
+	void handleEvents();
 public:
 	void init();
 	void startMain();
