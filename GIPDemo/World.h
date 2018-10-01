@@ -2,6 +2,7 @@
 #include "allegro5/allegro.h"
 #include "Terrain.h"
 #include <vector>
+#include "Camera.h"
 
 class World
 {
@@ -11,7 +12,7 @@ private:
 public:
 	Terrain* getTile(int x, int y);
 	void init();
-	void render();
+	void render(Camera *c);
 	void update();
 	World(Textures *t);
 	World();
