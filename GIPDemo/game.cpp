@@ -54,25 +54,27 @@ void game::render()
 {
 	al_clear_to_color(BLACK);
 	world.render(&cam);
+	player.render(&cam);
 	al_flip_display();
 }
 
 void game::update()
 {
-	cam.calculateOffset();
 	ALLEGRO_KEYBOARD_STATE ks;
 	al_get_keyboard_state(&ks);
 	if (al_key_down(&ks, ALLEGRO_KEY_LEFT)) {
-		this->cam.camX -= 0.5;
+		//this->cam.camX -= 0.5;
+		player.x--;
 		std::cout << "left \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_RIGHT)) {
-		this->cam.camX += 0.5;
+		//this->cam.camX += 0.5;
+		player.x++;
 		std::cout << "right \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_UP)) {
-		this->cam.camY -= 0.5;
+		player.y--;
 		std::cout << "up \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_DOWN)) {
-		this->cam.camY += 0.5;
+		player.y++;
 		std::cout << "down \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_U)) {
 		this->cam.zoom += 0.1;
@@ -81,7 +83,10 @@ void game::update()
 		this->cam.zoom -= 0.1;
 		std::cout << "D \n";
 	}
+	cam.calculateOffset(player.x, player.y, player.width, player.height);
 	world.update();
+	player.update();
+	//std::cout << player.x << std::endl;
 }
 
 game::game()

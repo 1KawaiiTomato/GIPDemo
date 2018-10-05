@@ -8,6 +8,7 @@ public:
 	float camX, camY;
 	float xOffset, yOffset;
 	void calculateOffset();
+	void calculateOffset(float x, float y, float w, float h);
 	Camera();
 	~Camera();
 };
