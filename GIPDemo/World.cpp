@@ -38,7 +38,6 @@ void World::render(Camera *c)
 			//al_draw_bitmap(getTile(i, j)->getTexture(), i * 32 + c->xOffset, j * 32 + c->yOffset, 0);
 		}
 	}
-	std::cout << "xOffset: " << c->xOffset << std::endl;
 }
 
 void World::update()

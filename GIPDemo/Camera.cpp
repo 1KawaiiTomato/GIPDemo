@@ -16,7 +16,7 @@ void Camera::calculateOffset(float x, float y, float w, float h)
 
 Camera::Camera()
 {
-	zoom = 0;
+	zoom = 2.5;
 	camX = xOffset;
 	camY = yOffset;
 }

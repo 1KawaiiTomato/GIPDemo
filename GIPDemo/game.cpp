@@ -65,28 +65,21 @@ void game::update()
 	if (al_key_down(&ks, ALLEGRO_KEY_LEFT)) {
 		//this->cam.camX -= 0.5;
 		player.x--;
-		std::cout << "left \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_RIGHT)) {
 		//this->cam.camX += 0.5;
 		player.x++;
-		std::cout << "right \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_UP)) {
 		player.y--;
-		std::cout << "up \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_DOWN)) {
 		player.y++;
-		std::cout << "down \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_U)) {
 		this->cam.zoom += 0.1;
-		std::cout << "U \n";
 	}if (al_key_down(&ks, ALLEGRO_KEY_D)) {
 		this->cam.zoom -= 0.1;
-		std::cout << "D \n";
 	}
 	cam.calculateOffset(player.x, player.y, player.width, player.height);
 	world.update();
 	player.update();
-	//std::cout << player.x << std::endl;
 }
 
 game::game()
