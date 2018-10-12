@@ -1,11 +1,12 @@
 #pragma once
 #include "World.h"
-#include "Camera.h"
+#include "Player.h"
 
 class game
 {
 private:
 	Camera cam;
+	Player player;
 	bool running;
 	ALLEGRO_COLOR BLACK;
 	Textures textures;
