@@ -7,10 +7,15 @@
 class World
 {
 private:
-	Terrain* tiles[100][20];
+	std::vector<std::vector<Terrain*>> tiles;
 	Terrain grassTerrain;
+	Terrain airTerrain;
+	Terrain cobbleTerrain;
+	Terrain woodTerrain;
+	Terrain dirtTerrain;
 public:
 	Terrain* getTile(int x, int y);
+	void loadMapCSV(std::string path);
 	void init();
 	void render(Camera *c);
 	void update();
