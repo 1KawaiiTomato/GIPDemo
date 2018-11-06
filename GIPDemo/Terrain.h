@@ -5,10 +5,14 @@ class Terrain
 {
 private:
 	ALLEGRO_BITMAP *texture;
+	int power;
+	bool solid;
 public:
 	float zoom;
 	ALLEGRO_BITMAP* getTexture();
-	Terrain(ALLEGRO_BITMAP *texture);
+	int getPower();
+	bool isSolid();
+	Terrain(ALLEGRO_BITMAP *texture, int power, bool solid);
 	Terrain();
 	~Terrain();
 };
