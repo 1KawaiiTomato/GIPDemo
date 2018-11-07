@@ -35,8 +35,8 @@ void game::init()
 	EQ = al_create_event_queue();
 	this->register_event_sources();
 	BLACK = al_map_rgb(0,0,0);
-	textures.loadTexturesFromAtlas("Images/blueSheet.xml");
-	world = World(&textures);
+	textures.loadTexturesFromAtlas("Images/spritesheet.xml");
+	world = World(&textures, "Data/terrain.xml");
 	world.init();
 	running = true;
 }

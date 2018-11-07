@@ -1,0 +1,7 @@
+<TextureAtlas imagePath="Images/spritesheet.png">
+	<SubTexture name="grass" x="32" y="0" width="32" height="32"/>
+	<SubTexture name="wood" x="0" y="32" width="32" height="32"/>
+	<SubTexture name="cobble" x="0" y="0" width="32" height="32"/>
+	<SubTexture name="air" x="32" y="32" width="32" height="32"/>
+	<SubTexture name="dirt" x="64" y="0" width="32" height="32"/>
+</TextureAtlas>

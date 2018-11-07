@@ -8,19 +8,20 @@ class World
 {
 private:
 	std::vector<std::vector<Terrain*>> tiles;
-	Terrain grassTerrain;
+	/*Terrain grassTerrain;
 	Terrain airTerrain;
 	Terrain cobbleTerrain;
 	Terrain woodTerrain;
-	Terrain dirtTerrain;
+	Terrain dirtTerrain;*/
+	std::unordered_map<std::string, Terrain> terrainTypes;
 public:
 	Terrain* getTile(int x, int y);
 	void loadMapCSV(std::string path);
 	void init();
 	void render(Camera *c);
 	void update();
-	World(Textures *t);
+	World(Textures *t, std::string textureTypesPath);
+	//World(Textures *t);
 	World();
 	~World();
 };
-
