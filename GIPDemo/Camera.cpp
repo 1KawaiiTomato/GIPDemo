@@ -14,11 +14,26 @@ void Camera::calculateOffset(float x, float y, float w, float h)
 	camY = y;
 }
 
+void Camera::update()
+{
+	ALLEGRO_KEYBOARD_STATE KS;
+	al_get_keyboard_state(&KS);
+	if (al_key_down(&KS, ALLEGRO_KEY_U)) {
+		this->zoom += 0.1;
+	}
+	if (al_key_down(&KS, ALLEGRO_KEY_D)) {
+		this->zoom -= 0.1;
+	}
+	if (zoom < 0.1) {
+		zoom = 0.1;
+	}
+}
+
 Camera::Camera()
 {
 	zoom = 2.5;
-	camX = xOffset;
-	camY = yOffset;
+	camX = xOffset = 0;
+	camY = yOffset = 0;
 }
 
 

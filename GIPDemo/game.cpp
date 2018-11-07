@@ -31,7 +31,9 @@ void game::handleEvents()
 
 void game::init()
 {
-	display = al_create_display(800, 600);
+	al_set_new_display_flags(ALLEGRO_RESIZABLE);
+	al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+	display = al_create_display(960, 540);
 	EQ = al_create_event_queue();
 	this->register_event_sources();
 	BLACK = al_map_rgb(0,0,0);
@@ -39,6 +41,7 @@ void game::init()
 	world = World(&textures, "Data/terrain.xml");
 	world.init();
 	running = true;
+	player.world = &world;
 }
 
 void game::startMain()
@@ -60,23 +63,7 @@ void game::render()
 
 void game::update()
 {
-	ALLEGRO_KEYBOARD_STATE ks;
-	al_get_keyboard_state(&ks);
-	if (al_key_down(&ks, ALLEGRO_KEY_LEFT)) {
-		//this->cam.camX -= 0.5;
-		player.x--;
-	}if (al_key_down(&ks, ALLEGRO_KEY_RIGHT)) {
-		//this->cam.camX += 0.5;
-		player.x++;
-	}if (al_key_down(&ks, ALLEGRO_KEY_UP)) {
-		player.y--;
-	}if (al_key_down(&ks, ALLEGRO_KEY_DOWN)) {
-		player.y++;
-	}if (al_key_down(&ks, ALLEGRO_KEY_U)) {
-		this->cam.zoom += 0.1;
-	}if (al_key_down(&ks, ALLEGRO_KEY_D)) {
-		this->cam.zoom -= 0.1;
-	}
+	cam.update();
 	cam.calculateOffset(player.x, player.y, player.width, player.height);
 	world.update();
 	player.update();
