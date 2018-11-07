@@ -1,0 +1,7 @@
+<TerrainTypes>
+	<Type texture="grass" name="grassBlock" power="3" isSolid="true"/>
+	<Type texture="wood" name="woodBlock" power="3" isSolid="true"/>
+	<Type texture="cobble" name="cobbleBlock" power="3" isSolid="true"/>
+	<Type texture="air" name="airBlock" power="3" isSolid="false"/>
+	<Type texture="dirt" name="dirtBlock" power="3" isSolid="true"/>
+</TerrainTypes>

@@ -38,7 +38,7 @@ void game::init()
 	this->register_event_sources();
 	BLACK = al_map_rgb(0,0,0);
 	textures.loadTexturesFromAtlas("Images/spritesheet.xml");
-	world = World(&textures);
+	world = World(&textures, "Data/terrain.xml");
 	world.init();
 	running = true;
 	player.world = &world;
