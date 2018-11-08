@@ -37,14 +37,7 @@ void World::loadMapCSV(std::string path)
 	for (int count = 0; file.good(); count++) {
 		std::getline(file, number, ',');
 		int indexValue = std::stoi(number);
-		switch (indexValue) {
-		default: std::cout << "add\n"; break;
-		case 0: tiles[count % width][std::floor(count / width)] = &terrainTypes["airBlock"]; break;
-		case 1: tiles[count % width][std::floor(count / width)] = &terrainTypes["grassBlock"]; break;
-		case 2: tiles[count % width][std::floor(count / width)] = &terrainTypes["cobbleBlock"]; break;
-		case 3: tiles[count % width][std::floor(count / width)] = &terrainTypes["woodBlock"]; break;
-		case 4: tiles[count % width][std::floor(count / width)] = &terrainTypes["dirtBlock"]; break;
-		}
+		tiles[count % width][std::floor(count / width)] = &terrainTypes[terrainIDs[indexValue]];
 	}
 	file.close();
 }
@@ -74,28 +67,25 @@ void World::update()
 {
 }
 
-/*World::World(Textures *t) : grassTerrain(t->textures["grass"], 3, true),
-							airTerrain(t->textures["air"], 0, false),
-							cobbleTerrain(t->textures["cobble"], 6, true),
-							woodTerrain(t->textures["wood"], 5, true),
-							dirtTerrain(t->textures["dirt"], 3, true)
-{
-}*/
-
 World::World(Textures *t, std::string textureTypesPath)
 {
 	tinyxml2::XMLDocument XMLDoc;
 	tinyxml2::XMLError eResult = XMLDoc.LoadFile(textureTypesPath.c_str());
 	if (eResult != tinyxml2::XML_SUCCESS) { std::cout << "texture types xml failed to load."; };
+
 	tinyxml2::XMLElement *Root = XMLDoc.FirstChildElement("TerrainTypes");
+
+	//Initialize all terraintypes and create map on id.
 	for (tinyxml2::XMLElement* child = Root->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		std::string name = child->Attribute("name");
 		std::string texture = child->Attribute("texture");
 		int power = child->IntAttribute("power", 3);
 		bool solid = child->BoolAttribute("isSolid", true);
+		int id = child->IntAttribute("id");
 		std::cout << name << ": " << texture << std::endl;
 		Terrain terr = Terrain(t->textures[texture], power, solid);
 		terrainTypes[name] = terr;
+		terrainIDs[id] = name;
 	}
 	for (auto it : terrainTypes) {
 		std::cout << it.first << ": " << it.second.getTexture() << std::endl;
