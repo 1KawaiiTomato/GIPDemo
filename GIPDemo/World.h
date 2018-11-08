@@ -8,12 +8,8 @@ class World
 {
 private:
 	std::vector<std::vector<Terrain*>> tiles;
-	/*Terrain grassTerrain;
-	Terrain airTerrain;
-	Terrain cobbleTerrain;
-	Terrain woodTerrain;
-	Terrain dirtTerrain;*/
 	std::unordered_map<std::string, Terrain> terrainTypes;
+	std::unordered_map<int, std::string> terrainIDs;
 public:
 	Terrain* getTile(int x, int y);
 	void loadMapCSV(std::string path);
@@ -21,7 +17,6 @@ public:
 	void render(Camera *c);
 	void update();
 	World(Textures *t, std::string textureTypesPath);
-	//World(Textures *t);
 	World();
 	~World();
 };

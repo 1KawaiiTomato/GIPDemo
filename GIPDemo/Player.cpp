@@ -16,7 +16,6 @@ void Player::update()
 		this->movement.x += 1;
 	}
 	if (!world->getTile(std::floor(x / 16), std::floor((y+16) / 16))->isSolid()) {
-		std::cout << std::floor(x / 16) << std::endl;
 		this->movement.y += 1;
 	}
 	movement.normalize();
