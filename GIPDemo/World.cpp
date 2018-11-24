@@ -51,9 +51,8 @@ void World::render(Camera *c)
 {
 	for (int i = (int)c->camX/16 - 10; i < (int)c->camX/16 + 10; i++) {
 		for (int j = 0; j < 20; j++) {
-			int utilisedI = i;
-			if (getTile(utilisedI, j) != NULL) {
-				al_draw_scaled_bitmap(getTile(utilisedI, j)->getTexture()
+			if (getTile(i, j) != NULL) {
+				al_draw_scaled_bitmap(getTile(i, j)->getTexture()
 					, 0, 0, 32, 32
 					, (((i * 32) - c->camX) * c->zoom) + c->xOffset
 					, (((j * 32) - c->camY) * c->zoom) + c->yOffset
