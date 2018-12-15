@@ -25,6 +25,10 @@ void game::handleEvents()
 			if (E.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
 				paused = !paused;
 			break;
+		case ALLEGRO_EVENT_KEY_UP:
+			if (E.keyboard.keycode == ALLEGRO_KEY_D || E.keyboard.keycode == ALLEGRO_KEY_U)
+				cam.calculateOptimisedRenderSize();
+			break;
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			running = false;
 			break;
@@ -45,18 +49,11 @@ void game::init()
 	textures.loadTexturesFromAtlas("Images/spritesheet.xml");
 	world = World(&textures, "Data/terrain.xml");
 	world.init();
+	cam.init();
 	inventory.init(&textures);
 	running = true;
 	paused = false;
 	player.world = &world;
-	UIElement *e = new Panel("Images/frame.png", 0, 0);
-	UI.addElement(e);
-	e = new Panel("Images/frame.png", 0.04, 0);
-	UI.addElement(e);
-	e = new Panel("Images/frame.png", 0.08, 0);
-	UI.addElement(e);
-	e = new Panel("Images/frame.png", 0.12, 0);
-	UI.addElement(e);
 }
 
 void game::startMain()

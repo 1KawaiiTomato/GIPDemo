@@ -4,14 +4,19 @@
 
 void Camera::calculateOffset(float x, float y, float w, float h)
 {
-	float width = al_get_display_width(al_get_current_display());
-	float height = al_get_display_height(al_get_current_display());
-
-	xOffset = width/2 - ((x+(w/2))*zoom);
-	yOffset = height/2 - ((y+(h/2))*zoom);
+	xOffset = dWidth/2 - ((x+(w/2))*zoom);
+	yOffset = dHeight/2 - ((y+(h/2))*zoom);
 
 	camX = x;
 	camY = y;
+}
+
+void Camera::calculateOptimisedRenderSize()
+{
+	half_optimised_render_width = std::ceil(dWidth / (zoom * BLOCK_SIZE))/2 + 1;
+	half_optimised_render_height = std::ceil(dHeight / (zoom * BLOCK_SIZE))/2 + 1;
+
+	std::cout << "hoWidth: " << half_optimised_render_width << "\nhoHeight: " << half_optimised_render_height << std::endl << std::endl;
 }
 
 void Camera::update()
@@ -27,6 +32,14 @@ void Camera::update()
 	if (zoom < 0.1) {
 		zoom = 0.1;
 	}
+}
+
+void Camera::init()
+{
+	dWidth = al_get_display_width(al_get_current_display());
+	dHeight = al_get_display_height(al_get_current_display());
+
+	calculateOptimisedRenderSize();
 }
 
 Camera::Camera()

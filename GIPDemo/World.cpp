@@ -49,8 +49,8 @@ void World::init()
 
 void World::render(Camera *c)
 {
-	for (int i = (int)c->camX/16 - 10; i < (int)c->camX/16 + 10; i++) {
-		for (int j = 0; j < 20; j++) {
+	for (int i = std::ceil(c->camX/16 - c->half_optimised_render_width); i < std::ceil(c->camX/16 + c->half_optimised_render_width); i++) {
+		for (int j = std::ceil(c->camY/16 - c->half_optimised_render_height); j < std::ceil(c->camY/16 + c->half_optimised_render_height); j++) {
 			if (getTile(i, j) != NULL) {
 				al_draw_scaled_bitmap(getTile(i, j)->getTexture()
 					, 0, 0, 32, 32
@@ -60,6 +60,17 @@ void World::render(Camera *c)
 			}
 		}
 	}
+	/*for (int i = (int)c->camX - c->xOffset; i < (int)c->camX + 20 - c->xOffset; i++) {
+		for (int j = 0; j < 20; j++) {
+			if (getTile(i, j) != NULL) {
+				al_draw_scaled_bitmap(getTile(i, j)->getTexture()
+					, 0, 0, 32, 32
+					, (((i * 32) - c->camX) * c->zoom) + c->xOffset
+					, (((j * 32) - c->camY) * c->zoom) + c->yOffset
+					, 32 * c->zoom, 32 * c->zoom, 0);
+			}
+		}
+	}*/
 }
 
 void World::update()
