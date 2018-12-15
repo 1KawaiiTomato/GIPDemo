@@ -1,0 +1,4 @@
+<InventoryObjectTypes>
+	<Type texture="grass" name="grassBlock"/>
+	<Type texture="cobble" name="stoneBlock"/>
+</InventoryObjectTypes>
