@@ -2,7 +2,7 @@
 
 
 
-void Inventory::loadTypes(std::string path, Textures *t)
+void Inventory::loadTypes(std::string path, Textures *t, World *world)
 {
 	tinyxml2::XMLDocument XMLDoc;
 	tinyxml2::XMLError eResult = XMLDoc.LoadFile(path.c_str());
@@ -13,7 +13,7 @@ void Inventory::loadTypes(std::string path, Textures *t)
 	for (tinyxml2::XMLElement* child = Root->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		std::string name = child->Attribute("name");
 		std::string texture = child->Attribute("texture");
-		InventoryObject iObj = InventoryObject(t->textures[texture]);
+		InventoryObject iObj = InventoryObject(t->textures[texture], &world->terrainTypes[name]);
 		inventoryObjects[name] = iObj;
 	}
 	for (auto it : inventoryObjects) {
@@ -26,16 +26,49 @@ void Inventory::addObject(InventoryObject * io)
 {
 }
 
-void Inventory::init(Textures *t)
+void Inventory::selectFrame(int dIndex)
 {
-	loadTypes("Data/inventory.xml", t);
+	selectedFrame += dIndex;
+	if (selectedFrame < 0)
+		selectedFrame = 5;
+	if (selectedFrame > 5)
+		selectedFrame = 0;
+}
+
+void Inventory::init(Textures *t, World *world)
+{
+	loadTypes("Data/inventory.xml", t, world);
 	this->frame = t->textures["frame"];
-	EQ = al_create_event_queue();
-	al_register_event_source(EQ, al_get_mouse_event_source());
+	this->selectionFrame = al_load_bitmap("Images/selectionFrame.png");
+	PausedEvents_Queue = al_create_event_queue();
+	UnpausedEvents_Queue = al_create_event_queue();
+	al_register_event_source(PausedEvents_Queue, al_get_mouse_event_source());
+	al_register_event_source(UnpausedEvents_Queue, al_get_mouse_event_source());
+	selectedFrame = 1;
 	font = al_load_font("Data/font.otf", 14, 0);
 	this->inventoryArray[0][0] = { &inventoryObjects["grassBlock"], 3 };
-	this->inventoryArray[0][2] = { &inventoryObjects["stoneBlock"], 1 };
-	this->inventoryArray[1][2] = { &inventoryObjects["stoneBlock"], 6 };
+	this->inventoryArray[0][2] = { &inventoryObjects["cobbleBlock"], 1 };
+	this->inventoryArray[1][2] = { &inventoryObjects["dirtBlock"], 6 };
+	this->inventoryArray[1][3] = { &inventoryObjects["woodBlock"], 6 };
+	this->inventoryArray[1][4] = { &inventoryObjects["woodBlock"], 1 };
+
+}
+
+void Inventory::setPaused(bool b)
+{
+	al_pause_event_queue(PausedEvents_Queue, b);
+}
+
+bool Inventory::holdingSomething()
+{
+	if (inventoryArray[selectedFrame][0].first)
+		return true;
+	return false;
+}
+
+Terrain * Inventory::getHand()
+{
+	return this->inventoryArray[selectedFrame][0].first->terrainPointer;
 }
 
 void Inventory::DragItem(float x, float y, std::string mode)
@@ -72,10 +105,10 @@ void Inventory::DragItem(float x, float y, std::string mode)
 }
 
 
-void Inventory::handleEvents()
+void Inventory::handlePausedEvents()
 {
 	ALLEGRO_EVENT E;
-	while (al_get_next_event(EQ, &E)) {
+	while (al_get_next_event(PausedEvents_Queue, &E)) {
 		switch (E.type)
 		{
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
@@ -83,6 +116,20 @@ void Inventory::handleEvents()
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 			DragItem(E.mouse.x, E.mouse.y, "drop");
+			break;
+		}
+	}
+}
+
+void Inventory::handleUnpausedEvents()
+{
+	ALLEGRO_EVENT E;
+	while (al_get_next_event(UnpausedEvents_Queue, &E)) {
+		switch (E.type)
+		{
+		case ALLEGRO_EVENT_MOUSE_AXES:
+			if (E.mouse.dz != 0)
+				selectFrame(E.mouse.dz);
 			break;
 		}
 	}
@@ -98,6 +145,7 @@ void Inventory::drawHotbar()
 			al_draw_text(font, al_map_rgb(255, 255, 255), i * SCALE + XOFFSET + XOFFSET_OBJ, j * SCALE + YOFFSET + YOFFSET_OBJ, 0, std::to_string(inventoryArray[i][j].second).c_str());
 		}
 	}
+	al_draw_bitmap(selectionFrame, selectedFrame * SCALE, 0, 0);
 }
 
 void Inventory::draw()
@@ -119,11 +167,13 @@ void Inventory::draw()
 		al_draw_bitmap(selectedObj.first->texture, x, y, 0);
 		al_draw_text(font, al_map_rgb(255, 255, 255), x, y, 0, std::to_string(selectedObj.second).c_str());
 	}
+	al_draw_bitmap(selectionFrame, selectedFrame * SCALE, 0, 0);
 }
 
 void Inventory::update()
 {
-	handleEvents();
+	handlePausedEvents();
+	handleUnpausedEvents();
 }
 
 Inventory::Inventory()

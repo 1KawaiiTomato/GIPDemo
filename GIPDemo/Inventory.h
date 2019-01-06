@@ -9,6 +9,8 @@
 class Inventory
 {
 private:
+	int selectedFrame;
+	ALLEGRO_BITMAP *selectionFrame;
 	ALLEGRO_BITMAP *frame;
 	ALLEGRO_FONT *font;
 	bool dragging = false;
@@ -22,13 +24,19 @@ private:
 	std::unordered_map<std::string, InventoryObject> inventoryObjects;
 	std::pair<InventoryObject *, int> inventoryArray[FRAMES_WIDTH][FRAMES_HEIGHT];
 	std::pair<InventoryObject *, int> selectedObj;
-	ALLEGRO_EVENT_QUEUE *EQ;
+	ALLEGRO_EVENT_QUEUE *PausedEvents_Queue;
+	ALLEGRO_EVENT_QUEUE *UnpausedEvents_Queue;
 public:
+	bool holdingSomething();
+	Terrain *getHand();
 	void DragItem(float x, float y, std::string mode);
-	void loadTypes(std::string path, Textures *t);
+	void loadTypes(std::string path, Textures *t, World *world);
+	void init(Textures *t, World *world);
 	void addObject(InventoryObject* io);
-	void init(Textures *t);
-	void handleEvents();
+	void selectFrame(int dIndex);
+	void handleUnpausedEvents();
+	void handlePausedEvents();
+	void setPaused(bool b);
 	void drawHotbar();
 	void draw();
 	void update();
