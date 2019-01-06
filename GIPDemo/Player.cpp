@@ -53,8 +53,8 @@ void Player::placeBlock(ALLEGRO_EVENT event, Camera *c, Inventory *inventory)
 		x = coordinates.first;
 		y = coordinates.second;
 		if (world->getTile(x, y) == &world->terrainTypes["airBlock"]) {
-			std::cout << inventory->getHand();
 			world->setTile(x, y, inventory->getHand());
+			inventory->useHand();
 		}
 	}
 }
@@ -67,6 +67,7 @@ void Player::breakBlock(ALLEGRO_EVENT event, Camera * c, Inventory *inventory)
 		std::pair<int, int> coordinates = c->screenToWorldCoordinates(x, y);
 		x = coordinates.first;
 		y = coordinates.second;
+
 		world->setTile(x, y, &world->terrainTypes["airBlock"]);
 	}
 }

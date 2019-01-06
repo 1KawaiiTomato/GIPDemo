@@ -148,6 +148,12 @@ void Inventory::drawHotbar()
 	al_draw_bitmap(selectionFrame, selectedFrame * SCALE, 0, 0);
 }
 
+void Inventory::useHand()
+{
+	if (--this->inventoryArray[selectedFrame][0].second < 1)
+		this->inventoryArray[selectedFrame][0] = { NULL, NULL };
+}
+
 void Inventory::draw()
 {
 	for (int i = 0; i < FRAMES_WIDTH; i++) {

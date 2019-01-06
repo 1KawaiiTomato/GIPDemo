@@ -38,6 +38,7 @@ public:
 	void handlePausedEvents();
 	void setPaused(bool b);
 	void drawHotbar();
+	void useHand();
 	void draw();
 	void update();
 	Inventory();
