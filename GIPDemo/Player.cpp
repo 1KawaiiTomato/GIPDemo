@@ -44,21 +44,22 @@ void Player::render(Camera *c)
 	//al_draw_bitmap(texture, x + c->xOffset, y + c->yOffset, 0);
 }
 
-void Player::placeBlock(ALLEGRO_EVENT event, Camera *c)
+void Player::placeBlock(ALLEGRO_EVENT event, Camera *c, Inventory *inventory)
 {
-	if (true) {
+	if (inventory->holdingSomething()) {
 		int x = event.mouse.x;
 		int y = event.mouse.y;
 		std::pair<int, int> coordinates = c->screenToWorldCoordinates(x, y);
 		x = coordinates.first;
 		y = coordinates.second;
 		if (world->getTile(x, y) == &world->terrainTypes["airBlock"]) {
-			world->setTile(x, y, &world->terrainTypes["cobbleBlock"]);
+			std::cout << inventory->getHand();
+			world->setTile(x, y, inventory->getHand());
 		}
 	}
 }
 
-void Player::breakBlock(ALLEGRO_EVENT event, Camera * c)
+void Player::breakBlock(ALLEGRO_EVENT event, Camera * c, Inventory *inventory)
 {
 	if (true) {
 		int x = event.mouse.x;
