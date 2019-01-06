@@ -12,6 +12,11 @@ Terrain * World::getTile(int x, int y)
 	return NULL;
 }
 
+void World::setTile(int x, int y, Terrain * t)
+{
+	tiles[x][y] = t;
+}
+
 void World::loadMapCSV(std::string path)
 {
 	//open csv file
