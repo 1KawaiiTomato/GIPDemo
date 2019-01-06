@@ -25,6 +25,7 @@ void game::handleEvents()
 		case ALLEGRO_EVENT_KEY_DOWN:
 			if (E.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
 				paused = !paused;
+				inventory.setPaused(!paused);
 			break;
 		case ALLEGRO_EVENT_KEY_UP:
 			if (E.keyboard.keycode == ALLEGRO_KEY_D || E.keyboard.keycode == ALLEGRO_KEY_U)
@@ -35,9 +36,9 @@ void game::handleEvents()
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 			if (E.mouse.button == 1)
-				player.breakBlock(E, &cam);
+				player.breakBlock(E, &cam, &inventory);
 			if (E.mouse.button == 2)
-				player.placeBlock(E, &cam);
+				player.placeBlock(E, &cam, &inventory);
 			break;
 		default:
 			break;
@@ -57,7 +58,7 @@ void game::init()
 	world = World(&textures, "Data/terrain.xml");
 	world.init();
 	cam.init();
-	inventory.init(&textures);
+	inventory.init(&textures, &world);
 	running = true;
 	paused = false;
 	player.world = &world;
@@ -67,13 +68,9 @@ void game::startMain()
 {
 	while (running) {
 		this->handleEvents();
-		UI.update();
-		if (!paused) {
-			this->update();
-		}
-		else {
-			inventory.update();
-		}
+		//UI.update();
+		if (!paused) { this->update(); }
+		inventory.update();
 		this->render();
 	}
 }
