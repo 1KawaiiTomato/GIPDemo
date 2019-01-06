@@ -8,6 +8,7 @@ void game::register_event_sources()
 	{
 		al_register_event_source(EQ, al_get_display_event_source(al_get_current_display()));
 		al_register_event_source(EQ, al_get_keyboard_event_source());
+		al_register_event_source(EQ, al_get_mouse_event_source());
 	}
 	catch (...)
 	{
@@ -31,6 +32,12 @@ void game::handleEvents()
 			break;
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			running = false;
+			break;
+		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+			if (E.mouse.button == 1)
+				player.breakBlock(E, &cam);
+			if (E.mouse.button == 2)
+				player.placeBlock(E, &cam);
 			break;
 		default:
 			break;
