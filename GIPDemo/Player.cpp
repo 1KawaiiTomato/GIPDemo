@@ -44,6 +44,32 @@ void Player::render(Camera *c)
 	//al_draw_bitmap(texture, x + c->xOffset, y + c->yOffset, 0);
 }
 
+void Player::placeBlock(ALLEGRO_EVENT event, Camera *c)
+{
+	if (true) {
+		int x = event.mouse.x;
+		int y = event.mouse.y;
+		std::pair<int, int> coordinates = c->screenToWorldCoordinates(x, y);
+		x = coordinates.first;
+		y = coordinates.second;
+		if (world->getTile(x, y) == &world->terrainTypes["airBlock"]) {
+			world->setTile(x, y, &world->terrainTypes["cobbleBlock"]);
+		}
+	}
+}
+
+void Player::breakBlock(ALLEGRO_EVENT event, Camera * c)
+{
+	if (true) {
+		int x = event.mouse.x;
+		int y = event.mouse.y;
+		std::pair<int, int> coordinates = c->screenToWorldCoordinates(x, y);
+		x = coordinates.first;
+		y = coordinates.second;
+		world->setTile(x, y, &world->terrainTypes["airBlock"]);
+	}
+}
+
 Player::Player()
 {
 	speed = 1;

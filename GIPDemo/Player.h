@@ -15,6 +15,8 @@ public:
 	float x, y;
 	void update();
 	void render(Camera *c);
+	void placeBlock(ALLEGRO_EVENT event, Camera *c);
+	void breakBlock(ALLEGRO_EVENT event, Camera *c);
 	Player();
 	~Player();
 };
