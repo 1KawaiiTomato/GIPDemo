@@ -17,7 +17,7 @@ bool Terrain::isSolid()
 	return solid;
 }
 
-Terrain::Terrain(ALLEGRO_BITMAP * tex, int power, bool solid) : texture(tex), power(power), solid(solid)
+Terrain::Terrain(ALLEGRO_BITMAP * tex, int power, bool solid, std::string name) : texture(tex), power(power), solid(solid), name(name)
 {
 }
 
