@@ -35,10 +35,12 @@ void game::handleEvents()
 			running = false;
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-			if (E.mouse.button == 1)
-				player.breakBlock(E, &cam, &inventory);
-			if (E.mouse.button == 2)
-				player.placeBlock(E, &cam, &inventory);
+			if (!paused) {
+				if (E.mouse.button == 1)
+					player.breakBlock(E, &cam, &inventory);
+				if (E.mouse.button == 2)
+					player.placeBlock(E, &cam, &inventory);
+			}
 			break;
 		default:
 			break;
