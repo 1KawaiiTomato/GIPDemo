@@ -13,6 +13,7 @@ public:
 	float camX, camY;
 	float xOffset, yOffset;
 	std::pair<float, float> screenToWorldCoordinates(float x, float y);
+	std::pair<float, float> worldToScreenCoordinates(float x, float y);
 	void calculateOffset(float x, float y, float w, float h);
 	void calculateOptimisedRenderSize();
 	void update();
