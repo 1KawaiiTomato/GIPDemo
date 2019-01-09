@@ -13,6 +13,11 @@ void Inventory::loadTypes(std::string path, Textures *t, World *world)
 	for (tinyxml2::XMLElement* child = Root->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		std::string name = child->Attribute("name");
 		std::string texture = child->Attribute("texture");
+
+#ifdef _DEBUG
+		std::cout << "Inventory.cpp line 18: " << t->textures[texture] << std::endl;
+#endif
+
 		InventoryObject iObj = InventoryObject(t->textures[texture], &world->terrainTypes[name]);
 		inventoryObjects[name] = iObj;
 	}
@@ -22,13 +27,35 @@ void Inventory::loadTypes(std::string path, Textures *t, World *world)
 	}
 }
 
-void Inventory::addObject(InventoryObject * io)
+void Inventory::addObject(std::string objectName)
 {
+	for (int x = 0; x < FRAMES_WIDTH; x++) {
+		for (int y = 0; y < FRAMES_HEIGHT; y++) {
+			//Stack already in inventory
+			if (inventoryArray[x][y].first == &inventoryObjects[objectName]) {
+				inventoryArray[x][y].second++;
+				return;
+				//Add to existing stack and return
+			}
+		}
+	}
+	//Stack not in inventory
+	for (int x = 0; x < FRAMES_WIDTH; x++) {
+		for (int y = 0; y < FRAMES_HEIGHT; y++) {
+			//Found empty spot
+			if (inventoryArray[x][y].second == NULL || inventoryArray[x][y].second <= 0) {
+				//Create new stack
+				inventoryArray[x][y].first = &inventoryObjects[objectName];
+				inventoryArray[x][y].second = 1;
+				return;
+			}
+		}
+	}
 }
 
 void Inventory::selectFrame(int dIndex)
 {
-	selectedFrame += dIndex;
+	selectedFrame -= dIndex;
 	if (selectedFrame < 0)
 		selectedFrame = 5;
 	if (selectedFrame > 5)
@@ -46,11 +73,11 @@ void Inventory::init(Textures *t, World *world)
 	al_register_event_source(UnpausedEvents_Queue, al_get_mouse_event_source());
 	selectedFrame = 1;
 	font = al_load_font("Data/font.otf", 14, 0);
-	this->inventoryArray[0][0] = { &inventoryObjects["grassBlock"], 3 };
-	this->inventoryArray[0][2] = { &inventoryObjects["cobbleBlock"], 1 };
-	this->inventoryArray[1][2] = { &inventoryObjects["dirtBlock"], 6 };
-	this->inventoryArray[1][3] = { &inventoryObjects["woodBlock"], 6 };
-	this->inventoryArray[1][4] = { &inventoryObjects["woodBlock"], 1 };
+	this->inventoryArray[0][0] = { &inventoryObjects["grassBlock"], 99 };
+	this->inventoryArray[0][2] = { &inventoryObjects["cobbleBlock"], 99 };
+	this->inventoryArray[1][2] = { &inventoryObjects["dirtBlock"], 99 };
+	//this->inventoryArray[1][3] = { &inventoryObjects["woodBlock"], 99 };
+	//this->inventoryArray[1][4] = { &inventoryObjects["woodBlock"], 99 };
 
 }
 

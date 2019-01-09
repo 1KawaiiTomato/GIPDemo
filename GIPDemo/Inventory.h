@@ -32,7 +32,7 @@ public:
 	void DragItem(float x, float y, std::string mode);
 	void loadTypes(std::string path, Textures *t, World *world);
 	void init(Textures *t, World *world);
-	void addObject(InventoryObject* io);
+	void addObject(std::string objectName);
 	void selectFrame(int dIndex);
 	void handleUnpausedEvents();
 	void handlePausedEvents();
