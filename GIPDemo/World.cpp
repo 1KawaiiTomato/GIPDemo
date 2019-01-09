@@ -98,7 +98,7 @@ World::World(Textures *t, std::string textureTypesPath)
 		bool solid = child->BoolAttribute("isSolid", true);
 		int id = child->IntAttribute("id");
 		std::cout << name << ": " << texture << std::endl;
-		Terrain terr = Terrain(t->textures[texture], power, solid);
+		Terrain terr = Terrain(t->textures[texture], power, solid, name);
 		terrainTypes[name] = terr;
 		terrainIDs[id] = name;
 	}
