@@ -73,10 +73,9 @@ void Player::breakBlock(ALLEGRO_EVENT event, Camera * c, Inventory *inventory)
 		x = coordinates.first;
 		y = coordinates.second;
 
-		std::cout << (std::pow(screenX - event.mouse.x, 2) + std::pow(screenY - event.mouse.y, 2)) << std::endl;
-
-		inventory->addObject(world->getTile(x,y)->name);
-		world->setTile(x, y, &world->terrainTypes["airBlock"]);
+		if(world->getTile(x,y)->name != "airBlock")
+			inventory->addObject(world->getTile(x,y)->name);
+			world->setTile(x, y, &world->terrainTypes["airBlock"]);
 	}
 }
 
