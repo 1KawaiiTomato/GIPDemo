@@ -2,6 +2,7 @@
 #include "allegro5/allegro.h"
 #include "World.h"
 #include "VectorMath.h"
+#include "Inventory.h"
 
 class Player
 {
@@ -15,6 +16,8 @@ public:
 	float x, y;
 	void update();
 	void render(Camera *c);
+	void placeBlock(ALLEGRO_EVENT event, Camera *c, Inventory *inventory);
+	void breakBlock(ALLEGRO_EVENT event, Camera *c, Inventory *inventory);
 	Player();
 	~Player();
 };

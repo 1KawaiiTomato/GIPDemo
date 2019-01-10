@@ -44,6 +44,41 @@ void Player::render(Camera *c)
 	//al_draw_bitmap(texture, x + c->xOffset, y + c->yOffset, 0);
 }
 
+void Player::placeBlock(ALLEGRO_EVENT event, Camera *c, Inventory *inventory)
+{
+	int screenX = this->x * c->zoom + c->xOffset;
+	int screenY = this->y * c->zoom + c->yOffset;
+	if (inventory->holdingSomething() &&
+		((std::pow(screenX - event.mouse.x, 2) + std::pow(screenY - event.mouse.y, 2)) <= 900 * 32 * c->zoom)) {
+		int x = event.mouse.x;
+		int y = event.mouse.y;
+		std::pair<int, int> coordinates = c->screenToWorldCoordinates(x, y);
+		x = coordinates.first;
+		y = coordinates.second;
+		if (world->getTile(x, y) == &world->terrainTypes["airBlock"]) {
+			world->setTile(x, y, inventory->getHand());
+			inventory->useHand();
+		}
+	}
+}
+
+void Player::breakBlock(ALLEGRO_EVENT event, Camera * c, Inventory *inventory)
+{
+	int screenX = this->x * c->zoom + c->xOffset;
+	int screenY = this->y * c->zoom + c->yOffset;
+	if ((std::pow(screenX - event.mouse.x, 2) + std::pow(screenY - event.mouse.y, 2)) <= 900*32*c->zoom) {
+		int x = event.mouse.x;
+		int y = event.mouse.y;
+		std::pair<int, int> coordinates = c->screenToWorldCoordinates(x, y);
+		x = coordinates.first;
+		y = coordinates.second;
+
+		if(world->getTile(x,y)->name != "airBlock")
+			inventory->addObject(world->getTile(x,y)->name);
+			world->setTile(x, y, &world->terrainTypes["airBlock"]);
+	}
+}
+
 Player::Player()
 {
 	speed = 1;

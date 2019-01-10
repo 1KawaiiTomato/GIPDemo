@@ -12,6 +12,11 @@ Terrain * World::getTile(int x, int y)
 	return NULL;
 }
 
+void World::setTile(int x, int y, Terrain * t)
+{
+	tiles[x][y] = t;
+}
+
 void World::loadMapCSV(std::string path)
 {
 	//open csv file
@@ -93,7 +98,7 @@ World::World(Textures *t, std::string textureTypesPath)
 		bool solid = child->BoolAttribute("isSolid", true);
 		int id = child->IntAttribute("id");
 		std::cout << name << ": " << texture << std::endl;
-		Terrain terr = Terrain(t->textures[texture], power, solid);
+		Terrain terr = Terrain(t->textures[texture], power, solid, name);
 		terrainTypes[name] = terr;
 		terrainIDs[id] = name;
 	}

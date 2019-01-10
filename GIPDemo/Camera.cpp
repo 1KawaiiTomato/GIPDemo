@@ -2,6 +2,20 @@
 
 
 
+std::pair<float, float> Camera::screenToWorldCoordinates(float x, float y)
+{
+	x = ((x - xOffset) / zoom + camX) / BLOCK_SIZE;
+	y = ((y - yOffset) / zoom + camY) / BLOCK_SIZE;
+	return { x,y };
+}
+
+std::pair<float, float> Camera::worldToScreenCoordinates(float x, float y)
+{
+	x = (x*BLOCK_SIZE - camX) * zoom + xOffset;
+	y = (y*BLOCK_SIZE - camY) * zoom + yOffset;
+	return { x,y };
+}
+
 void Camera::calculateOffset(float x, float y, float w, float h)
 {
 	xOffset = dWidth/2 - ((x+(w/2))*zoom);
