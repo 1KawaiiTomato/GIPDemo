@@ -74,10 +74,23 @@ void Inventory::init(Textures *t, World *world)
 	selectedFrame = 1;
 	font = al_load_font("Data/font.otf", 14, 0);
 	this->inventoryArray[0][0] = { &inventoryObjects["grassBlock"], 99 };
-	this->inventoryArray[0][2] = { &inventoryObjects["cobbleBlock"], 99 };
-	this->inventoryArray[1][2] = { &inventoryObjects["dirtBlock"], 99 };
-	//this->inventoryArray[1][3] = { &inventoryObjects["woodBlock"], 99 };
-	//this->inventoryArray[1][4] = { &inventoryObjects["woodBlock"], 99 };
+	this->inventoryArray[1][0] = { &inventoryObjects["cobbleBlock"], 99 };
+	this->inventoryArray[2][0] = { &inventoryObjects["dirtBlock"], 99 };
+	this->inventoryArray[3][0] = { &inventoryObjects["woodBlock"], 99 };
+	this->inventoryArray[4][0] = { &inventoryObjects["doorBlock"], 99 };
+	this->inventoryArray[5][0] = { &inventoryObjects["mushroomBlock"], 99 };
+	this->inventoryArray[0][1] = { &inventoryObjects["goldBlock"], 99 };
+	this->inventoryArray[1][1] = { &inventoryObjects["lapisOreBlock"], 99 };
+	this->inventoryArray[2][1] = { &inventoryObjects["torch"], 99 };
+	this->inventoryArray[3][1] = { &inventoryObjects["treeBlock"], 99 };
+	this->inventoryArray[4][1] = { &inventoryObjects["bridgeBlock"], 99 };
+	this->inventoryArray[5][1] = { &inventoryObjects["dirtBackground"], 99 };
+	this->inventoryArray[0][2] = { &inventoryObjects["coalBackground"], 99 };
+	this->inventoryArray[1][2] = { &inventoryObjects["chest"], 99 };
+	this->inventoryArray[2][2] = { &inventoryObjects["pointyRockBlock"], 99 };
+	this->inventoryArray[3][2] = { &inventoryObjects["treeBranchBlock"], 99 };
+	this->inventoryArray[4][2] = { &inventoryObjects["woodBackground"], 99 };
+	this->inventoryArray[5][2] = { &inventoryObjects["woodWallBackground"], 99 };
 
 }
 
