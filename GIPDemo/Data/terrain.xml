@@ -4,4 +4,18 @@
 	<Type id="2" texture="cobble" name="cobbleBlock" power="3" isSolid="true"/>
 	<Type id="0" texture="air" name="airBlock" power="3" isSolid="false"/>
 	<Type id="4" texture="dirt" name="dirtBlock" power="3" isSolid="true"/>
+	<Type id="5" texture="dirt_bg" name="dirtBackground" power="3" isSolid="false"/>
+	<Type id="6" texture="coal_bg" name="coalBackground" power="4" isSolid="false"/>
+	<Type id="7" texture="chest" name="chest" power="4" isSolid="true"/>
+	<Type id="8" texture="pointy_rock" name="pointyRockBlock" power="1" isSolid="false"/>
+	<Type id="9" texture="tree_branch" name="treeBranchBlock" power="4" isSolid="true"/>
+	<Type id="10" texture="tree" name="treeBlock" power="4" isSolid="true"/>
+	<Type id="11" texture="torch" name="torch" power="2" isSolid="false"/>
+	<Type id="12" texture="wooden_background" name="woodBackground" power="2" isSolid="false"/>
+	<Type id="13" texture="bridge" name="bridgeBlock" power="4" isSolid="true" />
+	<Type id="14" texture="cobble_lapis" name="lapisOreBlock" power="5" isSolid="true"/>
+	<Type id="15" texture="gold" name="goldBlock" power="5" isSolid="false"/>
+	<Type id="16" texture="woodwall" name="woodWallBackground" power="3" isSolid="false"/>
+	<Type id="17" texture="mushroom" name="mushroomBlock" power="1" isSolid="false" />
+	<Type id="18" texture="door" name="doorBlock" power="3" isSolid="true"/>
 </TerrainTypes>

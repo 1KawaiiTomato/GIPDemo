@@ -1,8 +1,22 @@
 <TextureAtlas imagePath="Images/spritesheet.png">
-	<SubTexture name="grass" x="32" y="0" width="32" height="32"/>
-	<SubTexture name="wood" x="0" y="32" width="32" height="32"/>
-	<SubTexture name="cobble" x="0" y="0" width="32" height="32"/>
-	<SubTexture name="air" x="32" y="32" width="32" height="32"/>
-	<SubTexture name="dirt" x="64" y="0" width="32" height="32"/>
-	<SubTexture name="frame" x="0" y="64" width="44" height="44"/>
+  <SubTexture name="grass" x="32" y="0" width="32" height="32" />
+  <SubTexture name="wood" x="0" y="32" width="32" height="32" />
+  <SubTexture name="cobble" x="0" y="0" width="32" height="32" />
+  <SubTexture name="air" x="32" y="32" width="32" height="32" />
+  <SubTexture name="dirt" x="64" y="0" width="32" height="32" />
+  <SubTexture name="frame" x="0" y="64" width="44" height="44" />
+  <SubTexture name="dirt_bg" x="64" y="32" width="32" height="32" />
+  <SubTexture name="coal_bg" x="64" y="64" width="32" height="32" />
+  <SubTexture name="chest" x="96" y="32" width="32" height="32" />
+  <SubTexture name="pointy_rock" x="96" y="0" width="32" height="32" />
+  <SubTexture name="tree_branch" x="128" y="0" width="32" height="32" />
+  <SubTexture name="tree" x="128" y="32" width="32" height="32" />
+  <SubTexture name="torch" x="128" y="64" width="32" height="32" />
+  <SubTexture name="wooden_background" x="160" y="0" width="32" height="32" />
+  <SubTexture name="bridge" x="160" y="32" width="32" height="32" />
+  <SubTexture name="cobble_lapis" x="160" y="64" width="32" height="32" />
+  <SubTexture name="gold" x="96" y="96" width="32" height="32" />
+  <SubTexture name="woodwall" x="96" y="64" width="32" height="32" />
+  <SubTexture name="mushroom" x="128" y="96" width="32" height="32" />
+  <SubTexture name="door" x="64" y="96" width="32" height="32" />
 </TextureAtlas>
