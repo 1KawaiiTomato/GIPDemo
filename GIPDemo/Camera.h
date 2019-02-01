@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 #include <iostream>
-#include "allegro5/allegro.h"
+#include "InputManager.h"
 
 class Camera
 {

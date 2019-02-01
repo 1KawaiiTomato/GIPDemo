@@ -1,8 +1,8 @@
 #pragma once
-#include "allegro5/allegro.h"
 #include "World.h"
 #include "VectorMath.h"
 #include "Inventory.h"
+#include "InputManager.h"
 
 class Player
 {

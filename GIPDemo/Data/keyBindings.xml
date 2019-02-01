@@ -1,0 +1,11 @@
+<Bindings>
+    <Binding keyBinding="0" keyCode="0"/>
+    <Binding keyBinding="1" keyCode="0"/>
+    <Binding keyBinding="2" keyCode="0"/>
+    <Binding keyBinding="3" keyCode="17"/>
+    <Binding keyBinding="4" keyCode="4"/>
+    <Binding keyBinding="5" keyCode="26"/>
+    <Binding keyBinding="6" keyCode="19"/>
+    <Binding keyBinding="7" keyCode="15"/>
+    <Binding keyBinding="8" keyCode="16"/>
+</Bindings>

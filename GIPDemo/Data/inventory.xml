@@ -1,4 +1,21 @@
 <InventoryObjectTypes>
 	<Type texture="grass" name="grassBlock"/>
-	<Type texture="cobble" name="stoneBlock"/>
+	<Type texture="cobble" name="cobbleBlock"/>
+	<Type texture="dirt" name="dirtBlock"/>
+	<Type texture="wood" name="woodBlock"/>
+	<Type texture="air" name="airBlock"/>
+	<Type texture="door" name="doorBlock"/>
+	<Type texture="mushroom" name="mushroomBlock"/>
+	<Type texture="gold" name="goldBlock"/>
+	<Type texture="cobble_lapis" name="lapisOreBlock"/>
+	<Type texture="torch" name="torch"/>
+	<Type texture="tree" name="treeBlock"/>
+	<Type texture="bridge" name="bridgeBlock"/>
+	<Type texture="dirt_bg" name="dirtBackground"/>
+	<Type texture="coal_bg" name="coalBackground"/>
+	<Type texture="chest" name="chest"/>
+	<Type texture="pointy_rock" name="pointyRockBlock"/>
+	<Type texture="tree_branch" name="treeBranchBlock"/>
+	<Type texture="wooden_background" name="woodBackground"/>
+	<Type texture="woodwall" name="woodWallBackground"/>
 </InventoryObjectTypes>

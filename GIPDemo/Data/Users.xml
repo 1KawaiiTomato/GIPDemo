@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PlayerCount numberOfPlayers="1"/>
+
+<Player name="John Doe">
+    <Location>
+        <Coordinates x="30" y="85"/>
+        <World id="0"/>
+    </Location>
+    <Outfit>
+        <Vanity>
+            <Hat id="0"/>
+            <Shirt id="1"/>
+            <Boots id="0"/>
+        </Vanity>
+        <Functional>
+            <Hat id="2"/>
+            <Shirt id="1"/>
+            <Pants id="0"/>
+            <Boots id="11"/>
+        </Functional>
+    </Outfit>
+    <Inventory>
+        <object id="29" amount="12" column="0" row="0"/>
+        <object id="13" amount="1" column="1" row="0"/>
+        <object id="9" amount="59" column="2" row="0"/>
+        <object id="32" amount="30" column="3" row="0"/>
+        <object id="38" amount="64" column="4" row="0"/>
+        <object id="38" amount="64" column="5" row="0"/>
+        <object id="23" amount="1" column="0" row="1"/>
+    </Inventory>
+    <Physics>
+        <Movement>
+            <Vector dx="0" dy="5"/>
+        </Movement>
+    </Physics>
+</Player>
