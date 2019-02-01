@@ -6,13 +6,16 @@ void Player::update()
 {
 	ALLEGRO_KEYBOARD_STATE KS;
 	al_get_keyboard_state(&KS);
-	if (al_key_down(&KS, ALLEGRO_KEY_UP)) {
+	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::MOVE_UP])) {
+		InputManager::getKeyCode(InputManager::keyBindings::MOVE_UP);
 		this->movement.y -= 2;
 	}
-	if (al_key_down(&KS, ALLEGRO_KEY_LEFT)) {
+	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::MOVE_LEFT])) {
+		InputManager::getKeyCode(InputManager::keyBindings::MOVE_LEFT);
 		this->movement.x -= 1;
 	}
-	if (al_key_down(&KS, ALLEGRO_KEY_RIGHT)) {
+	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::MOVE_RIGHT])) {
+		InputManager::getKeyCode(InputManager::keyBindings::MOVE_RIGHT);
 		this->movement.x += 1;
 	}
 	if (!world->getTile(std::floor(x / 16), std::floor((y+16) / 16))->isSolid()) {
@@ -82,8 +85,8 @@ void Player::breakBlock(ALLEGRO_EVENT event, Camera * c, Inventory *inventory)
 Player::Player()
 {
 	speed = 1;
-	x = 120;
-	y = 0;
+	x = 200;
+	y = 158;
 	this->texture = al_load_bitmap("Images/player.png");
 	this->width = al_get_bitmap_width(texture);
 	this->height = al_get_bitmap_height(texture);
