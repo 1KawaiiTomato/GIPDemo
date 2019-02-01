@@ -3,8 +3,9 @@
 #include "Player.h"
 #include "ElementManager.h"
 #include "Inventory.h"
+#include "allegro5/allegro_primitives.h"
 
-class game
+class Game
 {
 private:
 	ElementManager UI;
@@ -14,6 +15,8 @@ private:
 	bool paused;
 	ALLEGRO_COLOR BLACK;
 	Textures textures;
+	ALLEGRO_TIMER *timer;
+	ALLEGRO_EVENT_QUEUE *timerQueue;
 	ALLEGRO_EVENT_QUEUE *EQ;
 	ALLEGRO_DISPLAY *display;
 	World world;
@@ -25,6 +28,8 @@ public:
 	void startMain();
 	void render();
 	void update();
-	game();
-	~game();
+	void fade_in(ALLEGRO_BITMAP *bmp);
+	void fade_out();
+	Game();
+	~Game();
 };
