@@ -109,6 +109,7 @@ void Game::update()
 {
 	cam.update();
 	cam.calculateOffset(player.x, player.y, player.width, player.height);
+	InputManager::update();
 	world.update();
 	player.update();
 }

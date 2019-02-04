@@ -6,16 +6,13 @@ void Player::update()
 {
 	ALLEGRO_KEYBOARD_STATE KS;
 	al_get_keyboard_state(&KS);
-	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::MOVE_UP])) {
-		InputManager::getKeyCode(InputManager::keyBindings::MOVE_UP);
+	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_UP]) {
 		this->movement.y -= 2;
 	}
-	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::MOVE_LEFT])) {
-		InputManager::getKeyCode(InputManager::keyBindings::MOVE_LEFT);
+	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_LEFT]) {
 		this->movement.x -= 1;
 	}
-	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::MOVE_RIGHT])) {
-		InputManager::getKeyCode(InputManager::keyBindings::MOVE_RIGHT);
+	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_RIGHT]) {
 		this->movement.x += 1;
 	}
 	if (!world->getTile(std::floor(x / 16), std::floor((y+16) / 16))->isSolid()) {

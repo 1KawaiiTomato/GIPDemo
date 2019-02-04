@@ -37,11 +37,11 @@ void Camera::update()
 {
 	ALLEGRO_KEYBOARD_STATE KS;
 	al_get_keyboard_state(&KS);
-	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::ZOOM_IN])) {
+	if (InputManager::isKeyDown[InputManager::keyBindings::ZOOM_IN]) {
 		InputManager::getKeyCode(InputManager::keyBindings::ZOOM_IN);
 		this->zoom += 0.1;
 	}
-	if (al_key_down(&KS, InputManager::eventMap[InputManager::keyBindings::ZOOM_OUT])) {
+	if (InputManager::isKeyDown[InputManager::keyBindings::ZOOM_OUT]) {
 		InputManager::getKeyCode(InputManager::keyBindings::ZOOM_OUT);
 		this->zoom -= 0.1;
 	}
