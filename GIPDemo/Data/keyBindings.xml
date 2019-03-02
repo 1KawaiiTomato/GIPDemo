@@ -8,4 +8,5 @@
     <Binding keyBinding="6" keyCode="19"/>
     <Binding keyBinding="7" keyCode="15"/>
     <Binding keyBinding="8" keyCode="16"/>
+    <Binding keyBinding="9" keyCode="18"/>
 </Bindings>

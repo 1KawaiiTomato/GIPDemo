@@ -29,8 +29,8 @@ void Game::handleEvents()
 				inventory.setPaused(!paused);
 			break;
 		case ALLEGRO_EVENT_KEY_UP:
-			if (E.keyboard.keycode == InputManager::eventMap[InputManager::keyBindings::ZOOM_IN]
-				|| E.keyboard.keycode == InputManager::eventMap[InputManager::keyBindings::ZOOM_OUT])
+			if (E.keyboard.keycode == InputManager::keyMap[InputManager::keyBindings::ZOOM_IN]
+				|| E.keyboard.keycode == InputManager::keyMap[InputManager::keyBindings::ZOOM_OUT])
 				cam.calculateOptimisedRenderSize();
 			break;
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -96,12 +96,10 @@ void Game::render()
 	world.render(&cam);
 	player.render(&cam);
 	//UI.render();
-	if (paused) {
+	if (paused) 
 		inventory.draw();
-	}
-	else {
+	else
 		inventory.drawHotbar();
-	}
 	al_flip_display();
 }
 
@@ -109,6 +107,7 @@ void Game::update()
 {
 	cam.update();
 	cam.calculateOffset(player.x, player.y, player.width, player.height);
+	InputManager::update();
 	world.update();
 	player.update();
 }
