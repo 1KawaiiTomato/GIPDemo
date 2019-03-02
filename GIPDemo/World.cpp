@@ -65,6 +65,7 @@ void World::render(Camera *c)
 			}
 		}
 	}
+	monsterManager.render();
 	/*for (int i = (int)c->camX - c->xOffset; i < (int)c->camX + 20 - c->xOffset; i++) {
 		for (int j = 0; j < 20; j++) {
 			if (getTile(i, j) != NULL) {
@@ -80,6 +81,7 @@ void World::render(Camera *c)
 
 void World::update()
 {
+	monsterManager.update();
 }
 
 World::World(std::string textureTypesPath)

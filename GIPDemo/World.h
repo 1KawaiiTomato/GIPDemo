@@ -1,5 +1,6 @@
 #pragma once
 #include "allegro5/allegro.h"
+#include "MonsterManager.h"
 #include "Terrain.h"
 #include <vector>
 #include "Camera.h"
@@ -11,13 +12,14 @@ private:
 	std::unordered_map<int, std::string> terrainIDs;
 public:
 	std::unordered_map<std::string, Terrain> terrainTypes;
-	Terrain* getTile(int x, int y);
 	void setTile(int x, int y, Terrain *t);
+	World(std::string textureTypesPath);
 	void loadMapCSV(std::string path);
-	void init();
+	Terrain* getTile(int x, int y);
+	MonsterManager monsterManager;
 	void render(Camera *c);
 	void update();
-	World(std::string textureTypesPath);
+	void init();
 	World();
 	~World();
 };

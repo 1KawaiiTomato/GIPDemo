@@ -8,6 +8,7 @@
 class Textures
 {
 private:
+	void parseSubtexturesAndAnimations(tinyxml2::XMLElement* child, bool isAnimation = false, std::string animationName = "");
 	Textures();
 	~Textures();
 public:
@@ -19,5 +20,6 @@ public:
 	//Functionality
 	std::vector<ALLEGRO_BITMAP*> atlasses;
 	std::unordered_map<std::string, ALLEGRO_BITMAP*> textures;
+	std::unordered_map<std::string, std::vector<ALLEGRO_BITMAP*>> animations;
 	void loadTexturesFromAtlas(const std::string s);
 };
