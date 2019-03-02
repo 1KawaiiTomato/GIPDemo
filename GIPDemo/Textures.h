@@ -8,7 +8,7 @@
 class Textures
 {
 public:
-	ALLEGRO_BITMAP *atlas;
+	std::vector<ALLEGRO_BITMAP*> atlasses;
 	std::unordered_map<std::string, ALLEGRO_BITMAP*> textures;
 	void loadTexturesFromAtlas(const std::string s);
 	Textures();
