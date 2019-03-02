@@ -1,7 +1,7 @@
 #include "InputManager.h"
 
 //Keybindings
-std::unordered_map<InputManager::keyBindings, keyCodes>InputManager::eventMap;
+std::unordered_map<InputManager::keyBindings, keyCodes>InputManager::keyMap;
 std::unordered_map<InputManager::keyBindings, bool>InputManager::isKeyDown;
 
 //Persistent memory
@@ -25,14 +25,11 @@ void InputManager::saveDeltaTicks(unsigned int dt)
 
 keyCodes InputManager::getKeyCode(keyBindings kb)
 {
-	if (recording) {
-		//recordedKeystrokes.push_back(kb);
-	}
-	return InputManager::eventMap[kb];
+	return InputManager::keyMap[kb];
 }
 
 void InputManager::init() {
-	InputManager::eventMap = std::unordered_map<keyBindings, keyCodes>();
+	InputManager::keyMap = std::unordered_map<keyBindings, keyCodes>();
 	setDefaults();
 	recording = true;
 	deltaTicks = 0;
@@ -54,7 +51,7 @@ void InputManager::loadFromFile(std::string path)
 		int kc = child->IntAttribute("keyCode");
 		keyBindings kbe = static_cast<keyBindings>(kb);
 		keyCodes kce = static_cast<keyCodes>(kc);
-		InputManager::eventMap[kbe] = kce;
+		InputManager::keyMap[kbe] = kce;
 	}
 }
 
@@ -65,7 +62,7 @@ void InputManager::saveFile(std::string path)
 	for (tinyxml2::XMLElement* child = Root->FirstChildElement(); child != NULL; child = child->NextSiblingElement()) {
 		keyBindings kb = static_cast<keyBindings>(i);
 		child->SetAttribute("keyBinding", kb);
-		child->SetAttribute("keyCode", InputManager::eventMap[kb]);
+		child->SetAttribute("keyCode", InputManager::keyMap[kb]);
 		i++;
 	}
 	if (i < keyBindings::AMOUNT_OF_BINDINGS) {
@@ -81,13 +78,14 @@ void InputManager::saveFile(std::string path)
 
 void InputManager::setDefaults()
 {
-	InputManager::eventMap[MOVE_LEFT] = keyCodes::ALLEGRO_KEY_Q;
-	InputManager::eventMap[MOVE_RIGHT] = keyCodes::ALLEGRO_KEY_D;
-	InputManager::eventMap[MOVE_UP] = keyCodes::ALLEGRO_KEY_Z;
-	InputManager::eventMap[MOVE_DOWN] = keyCodes::ALLEGRO_KEY_S;
-	InputManager::eventMap[ZOOM_IN] = keyCodes::ALLEGRO_KEY_O;
-	InputManager::eventMap[ZOOM_OUT] = keyCodes::ALLEGRO_KEY_P;
-	InputManager::eventMap[TOGGLE_RECORD] = keyCodes::ALLEGRO_KEY_R;
+	InputManager::keyMap[MOVE_LEFT] = keyCodes::ALLEGRO_KEY_Q;
+	InputManager::keyMap[MOVE_RIGHT] = keyCodes::ALLEGRO_KEY_D;
+	InputManager::keyMap[MOVE_UP] = keyCodes::ALLEGRO_KEY_Z;
+	InputManager::keyMap[MOVE_DOWN] = keyCodes::ALLEGRO_KEY_S;
+	InputManager::keyMap[ZOOM_IN] = keyCodes::ALLEGRO_KEY_O;
+	InputManager::keyMap[ZOOM_OUT] = keyCodes::ALLEGRO_KEY_P;
+	InputManager::keyMap[TOGGLE_RECORD] = keyCodes::ALLEGRO_KEY_R;
+	InputManager::keyMap[TOGGLE_REPLAY] = keyCodes::ALLEGRO_KEY_T;
 }
 
 void InputManager::registerEventSources()
@@ -107,7 +105,7 @@ void InputManager::handleEvents()
 		case ALLEGRO_EVENT_KEY_DOWN:
 			for (int i = 0; i < AMOUNT_OF_BINDINGS; i++) {
 				keyBindings kb = static_cast<keyBindings>(i);
-				if (E.keyboard.keycode == eventMap[kb]) {
+				if (E.keyboard.keycode == keyMap[kb]) {
 					if (recording) {
 						recordedKeystrokes.push_back({ i, DOWNEVENT });
 						std::cout << deltaTicks << std::endl;
@@ -121,7 +119,7 @@ void InputManager::handleEvents()
 		case ALLEGRO_EVENT_KEY_UP:
 			for (int i = 0; i < AMOUNT_OF_BINDINGS; i++) {
 				keyBindings kb = static_cast<keyBindings>(i);
-				if (E.keyboard.keycode == eventMap[kb]) {
+				if (E.keyboard.keycode == keyMap[kb]) {
 					if (recording) {
 						recordedKeystrokes.push_back({ i, UPEVENT });
 						std::cout << deltaTicks << std::endl;
@@ -131,12 +129,21 @@ void InputManager::handleEvents()
 					//break;
 				}
 			}
-			if (E.keyboard.keycode == eventMap[TOGGLE_RECORD]) {
+			if (E.keyboard.keycode == keyMap[TOGGLE_REPLAY]) {
 				std::reverse(recordedTimings.begin(), recordedTimings.end());
 				std::reverse(recordedKeystrokes.begin(), recordedKeystrokes.end());
 				replaying = !replaying;
-				recording = !recording;
 				deltaTicks = 0;
+				std::cout << "replaying: " << replaying << std::endl;
+			}
+			if (E.keyboard.keycode == keyMap[TOGGLE_RECORD]) {
+				deltaTicks = 0;
+				recording = !recording;
+				if (recording) {
+					recordedKeystrokes.clear();
+					recordedTimings.clear();
+				}
+				std::cout << "recording: " << recording << std::endl;
 			}
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
@@ -164,8 +171,9 @@ void InputManager::update()
 			}
 		}
 		else {
+			std::cout << "Replay done" << std::endl;
 			replaying = false;
-			recording = true;
+			recording = false;
 			recordedKeystrokes.clear();
 			recordedTimings.clear();
 		}

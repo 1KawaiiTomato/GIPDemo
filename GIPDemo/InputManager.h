@@ -23,6 +23,7 @@ public:
 		ZOOM_IN,
 		ZOOM_OUT,
 		TOGGLE_RECORD,
+		TOGGLE_REPLAY,
 		//KEEP AT END!
 		AMOUNT_OF_BINDINGS
 	};
@@ -37,7 +38,7 @@ public:
 	static tinyxml2::XMLDocument XMLDoc;
 
 	//Keybindings
-	static std::unordered_map<keyBindings, keyCodes>eventMap;
+	static std::unordered_map<keyBindings, keyCodes>keyMap;
 	static std::unordered_map<keyBindings, bool>isKeyDown;
 	static keyCodes getKeyCode(keyBindings kb);
 	static void loadFromFile(std::string path);

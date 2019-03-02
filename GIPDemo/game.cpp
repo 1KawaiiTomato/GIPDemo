@@ -29,8 +29,8 @@ void Game::handleEvents()
 				inventory.setPaused(!paused);
 			break;
 		case ALLEGRO_EVENT_KEY_UP:
-			if (E.keyboard.keycode == InputManager::eventMap[InputManager::keyBindings::ZOOM_IN]
-				|| E.keyboard.keycode == InputManager::eventMap[InputManager::keyBindings::ZOOM_OUT])
+			if (E.keyboard.keycode == InputManager::keyMap[InputManager::keyBindings::ZOOM_IN]
+				|| E.keyboard.keycode == InputManager::keyMap[InputManager::keyBindings::ZOOM_OUT])
 				cam.calculateOptimisedRenderSize();
 			break;
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
