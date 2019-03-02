@@ -96,12 +96,10 @@ void Game::render()
 	world.render(&cam);
 	player.render(&cam);
 	//UI.render();
-	if (paused) {
+	if (paused) 
 		inventory.draw();
-	}
-	else {
+	else
 		inventory.drawHotbar();
-	}
 	al_flip_display();
 }
 
