@@ -17,7 +17,7 @@ public:
 	void init();
 	void render(Camera *c);
 	void update();
-	World(Textures *t, std::string textureTypesPath);
+	World(std::string textureTypesPath);
 	World();
 	~World();
 };

@@ -1,5 +1,11 @@
 #include "Textures.h"
 
+Textures & Textures::getInstance()
+{
+	static Textures instance;
+	return instance;
+}
+
 void Textures::loadTexturesFromAtlas(std::string s)
 {
 	//open xml file

@@ -60,11 +60,12 @@ void Game::init()
 	timer = al_create_timer(1.0 / 60);
 	this->register_event_sources();
 	BLACK = al_map_rgb(0,0,0);
-	textures.loadTexturesFromAtlas("Images/spritesheet.xml");
-	world = World(&textures, "Data/terrain.xml");
+	//textures.loadTexturesFromAtlas("Images/spritesheet.xml");
+	Textures::getInstance().loadTexturesFromAtlas("Images/spritesheet.xml");
+	world = World("Data/terrain.xml");
 	world.init();
 	cam.init();
-	inventory.init(&textures, &world);
+	inventory.init(&world);
 	running = true;
 	paused = false;
 	player.world = &world;

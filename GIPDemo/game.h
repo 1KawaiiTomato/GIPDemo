@@ -14,7 +14,7 @@ private:
 	bool running;
 	bool paused;
 	ALLEGRO_COLOR BLACK;
-	Textures textures;
+	//Textures textures;
 	ALLEGRO_TIMER *timer;
 	ALLEGRO_EVENT_QUEUE *timerQueue;
 	ALLEGRO_EVENT_QUEUE *EQ;

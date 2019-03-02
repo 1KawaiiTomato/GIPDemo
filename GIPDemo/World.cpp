@@ -82,7 +82,7 @@ void World::update()
 {
 }
 
-World::World(Textures *t, std::string textureTypesPath)
+World::World(std::string textureTypesPath)
 {
 	tinyxml2::XMLDocument XMLDoc;
 	tinyxml2::XMLError eResult = XMLDoc.LoadFile(textureTypesPath.c_str());
@@ -98,7 +98,7 @@ World::World(Textures *t, std::string textureTypesPath)
 		bool solid = child->BoolAttribute("isSolid", true);
 		int id = child->IntAttribute("id");
 		std::cout << name << ": " << texture << std::endl;
-		Terrain terr = Terrain(t->textures[texture], power, solid, name);
+		Terrain terr = Terrain(Textures::getInstance().textures[texture], power, solid, name);
 		terrainTypes[name] = terr;
 		terrainIDs[id] = name;
 	}
