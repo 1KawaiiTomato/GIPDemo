@@ -22,18 +22,21 @@ void Textures::loadTexturesFromAtlas(std::string s)
 
 void Textures::parseSubtexturesAndAnimations(tinyxml2::XMLElement* child, bool isAnimation, std::string animationName)
 {
-	if (child->Name() == "Animation"){
-		parseSubtexturesAndAnimations(child->FirstChildElement(), true, child->Attribute("name"));
-	}
 	for (; child != NULL; child = child->NextSiblingElement()) {
+		std::string n = child->Name();
+
+		if (n == "Animation") {
+			std::cout << child->Name() << std::endl;
+			parseSubtexturesAndAnimations(child->FirstChildElement(), true, child->Attribute("name"));
+		}
 		int x = child->IntAttribute("x");
 		int y = child->IntAttribute("y");
 		int w = child->IntAttribute("width");
 		int h = child->IntAttribute("height");
-		std::string name = child->Attribute("name");
-		if (!isAnimation)
+		if (!isAnimation) {
+			std::string name = child->Attribute("name");
 			Textures::textures[name] = al_create_sub_bitmap(atlasses.back(), x, y, w, h);
-		else
+		}else
 			Textures::animations[animationName].push_back(al_create_sub_bitmap(atlasses.back(), x, y, w, h));
 	}
 }
