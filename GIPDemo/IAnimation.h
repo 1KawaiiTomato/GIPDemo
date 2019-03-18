@@ -1,14 +1,15 @@
 #pragma once
 #include "allegro5/allegro.h"
 #include <vector>
+#include "Textures.h"
 
 class IAnimation
 {
 protected:
 	IAnimation();
 	~IAnimation();
-	void setAnimation(std::vector<ALLEGRO_BITMAP*>* animation, int speed);
-	void setAnimation(std::vector<ALLEGRO_BITMAP*>* animation);
+	void setAnimation(std::string animationName, int speed);
+	void setAnimation(std::string animationName);
 	void setAnimationSpeed(int speed);
 	void updateAnimation();
 

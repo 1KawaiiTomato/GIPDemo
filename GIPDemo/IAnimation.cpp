@@ -11,16 +11,16 @@ IAnimation::~IAnimation()
 {
 }
 
-void IAnimation::setAnimation(std::vector<ALLEGRO_BITMAP*>* animation, int speed)
+void IAnimation::setAnimation(std::string animationName, int speed)
 {
 	setAnimationSpeed(speed);
-	setAnimation(animation);
+	setAnimation(animationName);
 }
 
-void IAnimation::setAnimation(std::vector<ALLEGRO_BITMAP*>* animation)
+void IAnimation::setAnimation(std::string animationName)
 {
+	this->animation = &Textures::getInstance().animations[animationName];
 	this->animationLength = animation->size();
-	this->animation = animation;
 }
 
 void IAnimation::setAnimationSpeed(int speed)
