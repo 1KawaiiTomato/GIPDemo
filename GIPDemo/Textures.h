@@ -18,7 +18,7 @@ public:
 	static Textures &getInstance();
 	
 	//Functionality
-	std::vector<ALLEGRO_BITMAP*> atlasses;
+	std::vector<ALLEGRO_BITMAP*> atlases;
 	std::unordered_map<std::string, ALLEGRO_BITMAP*> textures;
 	std::unordered_map<std::string, std::vector<ALLEGRO_BITMAP*>> animations;
 	void loadTexturesFromAtlas(const std::string s);

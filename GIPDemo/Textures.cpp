@@ -14,7 +14,7 @@ void Textures::loadTexturesFromAtlas(std::string s)
 
 	//Load in the atlas
 	tinyxml2::XMLElement * pRoot = xmlDoc.FirstChildElement();
-	Textures::atlasses.push_back(al_load_bitmap(pRoot->Attribute("imagePath")));
+	Textures::atlases.push_back(al_load_bitmap(pRoot->Attribute("imagePath")));
 
 	//Parse xml and create subtextures accordingly
 	parseSubtexturesAndAnimations(pRoot->FirstChildElement());
@@ -23,10 +23,7 @@ void Textures::loadTexturesFromAtlas(std::string s)
 void Textures::parseSubtexturesAndAnimations(tinyxml2::XMLElement* child, bool isAnimation, std::string animationName)
 {
 	for (; child != NULL; child = child->NextSiblingElement()) {
-		std::string n = child->Name();
-
-		if (n == "Animation") {
-			std::cout << child->Name() << std::endl;
+		if ((std::string)child->Name() == "Animation") {
 			parseSubtexturesAndAnimations(child->FirstChildElement(), true, child->Attribute("name"));
 		}
 		int x = child->IntAttribute("x");
@@ -35,9 +32,9 @@ void Textures::parseSubtexturesAndAnimations(tinyxml2::XMLElement* child, bool i
 		int h = child->IntAttribute("height");
 		if (!isAnimation) {
 			std::string name = child->Attribute("name");
-			Textures::textures[name] = al_create_sub_bitmap(atlasses.back(), x, y, w, h);
+			Textures::textures[name] = al_create_sub_bitmap(atlases.back(), x, y, w, h);
 		}else
-			Textures::animations[animationName].push_back(al_create_sub_bitmap(atlasses.back(), x, y, w, h));
+			Textures::animations[animationName].push_back(al_create_sub_bitmap(atlases.back(), x, y, w, h));
 	}
 }
 
