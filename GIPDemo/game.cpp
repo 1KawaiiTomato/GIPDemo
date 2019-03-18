@@ -60,7 +60,6 @@ void Game::init()
 	timer = al_create_timer(1.0 / 60);
 	this->register_event_sources();
 	BLACK = al_map_rgb(0,0,0);
-	//textures.loadTexturesFromAtlas("Images/spritesheet.xml");
 	Textures::getInstance().loadTexturesFromAtlas("Images/spritesheet.xml");
 	world = World("Data/terrain.xml");
 	world.init();
@@ -86,7 +85,7 @@ void Game::startMain()
 		//UI.update();
 		if (!paused) { this->update(); }
 		inventory.update();
-		if(al_event_queue_is_empty(timerQueue))
+		if (al_event_queue_is_empty(timerQueue))
 			this->render();
 	}
 }
