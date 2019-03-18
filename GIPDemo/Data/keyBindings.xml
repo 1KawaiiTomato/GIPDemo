@@ -9,4 +9,5 @@
     <Binding keyBinding="7" keyCode="15"/>
     <Binding keyBinding="8" keyCode="16"/>
     <Binding keyBinding="9" keyCode="18"/>
+    <Binding keyBinding="10" keyCode="20"/>
 </Bindings>

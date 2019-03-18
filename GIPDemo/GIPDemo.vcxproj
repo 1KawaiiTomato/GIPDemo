@@ -178,8 +178,10 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ElementManager.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Frog.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GIPDemo.cpp" />
+    <ClCompile Include="IAnimation.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryObject.cpp" />
@@ -203,7 +205,9 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ElementManager.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Frog.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="IAnimation.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryObject.h" />
