@@ -2,9 +2,16 @@
 
 
 
-void Mob::render()
+void Mob::render(Camera *cam)
 {
-	al_draw_scaled_bitmap((*animation)[animationCount], 0, 0, 16, 16, ++x, y, 32, 32, 0);
+	std::pair<int, int> coords = cam->worldToScreenCoordinates(x, y);
+
+	if (idle)
+		al_draw_scaled_bitmap((*animation)[0], 0, 0, 16, 16,
+			coords.first, coords.second, 16 * cam->zoom, 16 * cam->zoom, flag);
+	else
+		al_draw_scaled_bitmap((*animation)[animationCount], 0, 0, 16, 16,
+		coords.first, coords.second, 16 * cam->zoom, 16 * cam->zoom, flag);
 }
 
 void Mob::update()
@@ -14,9 +21,8 @@ void Mob::update()
 
 Mob::Mob()
 {
-	y = 395;
-	x = std::rand() % 100;
-	setAnimation(&Textures::getInstance().animations["frogIdle"], 6);
+	x = 200;
+	y = 336;
 }
 
 Mob::~Mob()

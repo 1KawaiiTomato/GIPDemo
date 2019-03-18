@@ -1,16 +1,18 @@
 #pragma once
 #include "Textures.h"
 #include "IAnimation.h"
+#include "Camera.h"
 #include "allegro5/allegro.h"
 
 class Mob : public IAnimation
 {
-private:
+protected:
 	float x, y;
-	ALLEGRO_BITMAP *Texture;
-	int bx, by;
+	int destinationWidth, destinationHeight;
+	int flag;
+	bool idle;
 public:
-	virtual void render();
+	virtual void render(Camera *cam);
 	virtual void update();
 	Mob();
 	~Mob();
