@@ -189,6 +189,7 @@
     <ClCompile Include="MonsterManager.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Panel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="tinyxml2.h" />
