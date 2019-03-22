@@ -4,6 +4,7 @@
 
 IAnimation::IAnimation()
 {
+	setAnimationSpeed(3);
 }
 
 
