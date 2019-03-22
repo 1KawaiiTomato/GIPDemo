@@ -31,7 +31,7 @@ keyCodes InputManager::getKeyCode(keyBindings kb)
 void InputManager::init() {
 	InputManager::keyMap = std::unordered_map<keyBindings, keyCodes>();
 	setDefaults();
-	recording = true;
+	recording = false;
 	deltaTicks = 0;
 	loadFromFile("Data/keyBindings.xml");
 

@@ -178,13 +178,18 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ElementManager.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Frog.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GIPDemo.cpp" />
+    <ClCompile Include="IAnimation.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryObject.cpp" />
+    <ClCompile Include="Mob.cpp" />
+    <ClCompile Include="MonsterManager.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
@@ -193,6 +198,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -200,13 +206,18 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ElementManager.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Frog.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="IAnimation.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryObject.h" />
+    <ClInclude Include="Mob.h" />
+    <ClInclude Include="MonsterManager.h" />
     <ClInclude Include="Panel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="tinyxml2.h" />

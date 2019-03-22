@@ -2,7 +2,7 @@
 
 
 
-void Inventory::loadTypes(std::string path, Textures *t, World *world)
+void Inventory::loadTypes(std::string path, World *world)
 {
 	tinyxml2::XMLDocument XMLDoc;
 	tinyxml2::XMLError eResult = XMLDoc.LoadFile(path.c_str());
@@ -15,10 +15,10 @@ void Inventory::loadTypes(std::string path, Textures *t, World *world)
 		std::string texture = child->Attribute("texture");
 
 #ifdef _DEBUG
-		std::cout << "Inventory.cpp line 18: " << t->textures[texture] << std::endl;
+		std::cout << "Inventory.cpp line 18: " << Textures::getInstance().textures[texture] << std::endl;
 #endif
 
-		InventoryObject iObj = InventoryObject(t->textures[texture], &world->terrainTypes[name]);
+		InventoryObject iObj = InventoryObject(Textures::getInstance().textures[texture], &world->terrainTypes[name]);
 		inventoryObjects[name] = iObj;
 	}
 	for (auto it : inventoryObjects) {
@@ -62,10 +62,10 @@ void Inventory::selectFrame(int dIndex)
 		selectedFrame = 0;
 }
 
-void Inventory::init(Textures *t, World *world)
+void Inventory::init(World *world)
 {
-	loadTypes("Data/inventory.xml", t, world);
-	this->frame = t->textures["frame"];
+	loadTypes("Data/inventory.xml", world);
+	this->frame = Textures::getInstance().textures["frame"];
 	this->selectionFrame = al_load_bitmap("Images/selectionFrame.png");
 	PausedEvents_Queue = al_create_event_queue();
 	UnpausedEvents_Queue = al_create_event_queue();
