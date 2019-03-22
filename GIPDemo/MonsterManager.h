@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Textures.h"
 #include "Frog.h"
+#include "Skeleton.h"
 
 
 class MonsterManager

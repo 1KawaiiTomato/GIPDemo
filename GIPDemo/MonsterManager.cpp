@@ -23,6 +23,8 @@ MonsterManager::MonsterManager()
 	Textures::getInstance().loadTexturesFromAtlas("Images/monsters/skeleton.xml");
 	mobs.push_back(new Frog());
 	mobs.push_back(new Frog());
+	mobs.push_back(new Skeleton());
+	mobs.push_back(new Skeleton());
 }
 
 
