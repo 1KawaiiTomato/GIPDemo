@@ -4,15 +4,19 @@
 
 std::pair<float, float> Camera::screenToWorldCoordinates(float x, float y)
 {
-	x = ((x - xOffset) / zoom + camX) / BLOCK_SIZE;
-	y = ((y - yOffset) / zoom + camY) / BLOCK_SIZE;
+	//x = ((x - xOffset) / zoom + camX) / BLOCK_SIZE;
+	//y = ((y - yOffset) / zoom + camY) / BLOCK_SIZE;
+	x = ((x - xOffset) / zoom + camX);
+	y = ((y - yOffset) / zoom + camY);
 	return { x,y };
 }
 
 std::pair<float, float> Camera::worldToScreenCoordinates(float x, float y)
 {
-	x = (x*BLOCK_SIZE - camX) * zoom + xOffset;
-	y = (y*BLOCK_SIZE - camY) * zoom + yOffset;
+	x = (x - camX) * zoom + xOffset;
+	y = (y - camY) * zoom + yOffset;
+	/*x = (x*BLOCK_SIZE - camX) * zoom + xOffset;
+	y = (y*BLOCK_SIZE - camY) * zoom + yOffset;*/
 	return { x,y };
 }
 

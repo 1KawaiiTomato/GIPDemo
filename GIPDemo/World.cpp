@@ -65,6 +65,7 @@ void World::render(Camera *c)
 			}
 		}
 	}
+	monsterManager.render(c);
 	/*for (int i = (int)c->camX - c->xOffset; i < (int)c->camX + 20 - c->xOffset; i++) {
 		for (int j = 0; j < 20; j++) {
 			if (getTile(i, j) != NULL) {
@@ -80,9 +81,10 @@ void World::render(Camera *c)
 
 void World::update()
 {
+	monsterManager.update();
 }
 
-World::World(Textures *t, std::string textureTypesPath)
+World::World(std::string textureTypesPath)
 {
 	tinyxml2::XMLDocument XMLDoc;
 	tinyxml2::XMLError eResult = XMLDoc.LoadFile(textureTypesPath.c_str());
@@ -98,7 +100,7 @@ World::World(Textures *t, std::string textureTypesPath)
 		bool solid = child->BoolAttribute("isSolid", true);
 		int id = child->IntAttribute("id");
 		std::cout << name << ": " << texture << std::endl;
-		Terrain terr = Terrain(t->textures[texture], power, solid, name);
+		Terrain terr = Terrain(Textures::getInstance().textures[texture], power, solid, name);
 		terrainTypes[name] = terr;
 		terrainIDs[id] = name;
 	}

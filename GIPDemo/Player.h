@@ -5,11 +5,13 @@
 #include "InputManager.h"
 
 class Player
+	: public IAnimation
 {
 private:
 	ALLEGRO_BITMAP *texture;
 	Vector movement;
 	float speed;
+	int flag = 0;
 public:
 	World *world;
 	float width, height;

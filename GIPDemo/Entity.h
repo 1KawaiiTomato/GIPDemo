@@ -11,4 +11,3 @@ public:
 	Entity();
 	~Entity();
 };
-
