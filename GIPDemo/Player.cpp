@@ -22,18 +22,58 @@ void Player::update()
 	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_DOWN]) {
 		setAnimation("adventurerCrouch"); idle = false;
 	}
-	if (!world->getTile(std::floor(x / 16), std::floor((y+16) / 16))->isSolid()) {
-		this->movement.y += 1;
-	}
 	if (idle)
 		setAnimation("adventurerIdle", 3);
 	else
 		setAnimationSpeed(8);
-	movement.normalize();
-	this->x += this->movement.x*speed;
-	this->y += this->movement.y*speed;
-	this->movement = Vector(0, 0);
+	updatePhysics();
 	updateAnimation();
+}
+
+void Player::updatePhysics()
+{
+	float x = this->x;
+	float y = this->y;
+	movement.y++;
+	movement.normalize();
+
+	//X-axis
+	x += this->movement.x*speed;
+	if (movement.x > 0) {
+		if (world->getTile((x / 16 + 0.9), (y / 16))->isSolid() ||
+			world->getTile((x / 16 + 0.9), (y / 16 + 0.9))->isSolid()) {
+			std::cout << "x: " << x << std::endl;
+			x = (int)this->x + 0.1;
+			setAnimation("adventurerIdle");
+			std::cout << "nx: " << x << std::endl;
+			std::cout << "--------------------------------" << std::endl;
+		}
+	}
+	else {
+		if (world->getTile((x / 16 + 0.6), (y / 16))->isSolid() ||
+			world->getTile((x / 16 + 0.6), (y / 16 + 0.9))->isSolid()) {
+			x = ((int)this->x) + 0.6;
+			setAnimation("adventurerIdle");
+		}
+	}
+	//Y-axis
+	y += this->movement.y*speed;
+	if (movement.y >= 0) {
+		if (world->getTile(x / 16 + 0.6, y / 16 + 1)->isSolid() ||
+			world->getTile(x / 16 + 0.9, y / 16 + 1)->isSolid()) {
+			y = (int)y;
+			movement.y = -1;
+		}
+	}
+	else {
+		if (world->getTile(x / 16 + 0.6, y / 16)->isSolid() ||
+			world->getTile(x / 16 + 0.9, y / 16)->isSolid()) {
+			y = (int)y+1;
+		}
+	}
+	this->movement = Vector(0, movement.y);
+	this->x = x;
+	this->y = y;
 }
 
 void Player::render(Camera *c)
@@ -44,6 +84,12 @@ void Player::render(Camera *c)
 		, x*c->zoom + c->xOffset
 		, y*c->zoom + c->yOffset
 		, width * c->zoom, height * c->zoom, flag);
+#if _DEBUG
+	std::pair<int, int> coords = { x*c->zoom + c->xOffset, y*c->zoom + c->yOffset };
+	al_draw_rectangle(coords.first, coords.second,
+		coords.first + this->width*c->zoom, coords.second + this->height*c->zoom,
+		al_map_rgb(10, 10, 10), 0);
+#endif
 }
 
 void Player::placeBlock(ALLEGRO_EVENT event, Camera *c, Inventory *inventory)
