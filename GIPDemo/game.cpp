@@ -68,6 +68,7 @@ void Game::init()
 	running = true;
 	paused = false;
 	player.world = &world;
+	player.init();
 	#if !_DEBUG
 		fade_in(al_load_bitmap("Images/startScreen.png"));
 		fade_out();

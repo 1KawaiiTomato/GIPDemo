@@ -2,6 +2,11 @@
 #include <iostream>
 
 
+void Player::init()
+{
+	hearts = new heartUI();
+}
+
 void Player::update()
 {
 	bool idle = true;
@@ -40,10 +45,10 @@ void Player::updatePhysics()
 	//X-axis
 	x += this->movement.x*speed;
 	if (movement.x > 0) {
-		if (world->getTile((x / 16 + 0.9), (y / 16))->isSolid() ||
-			world->getTile((x / 16 + 0.9), (y / 16 + 0.9))->isSolid()) {
+		if (world->getTile((x / 16 + 0.85), (y / 16))->isSolid() ||
+			world->getTile((x / 16 + 0.85), (y / 16 + 0.9))->isSolid()) {
 			std::cout << "x: " << x << std::endl;
-			x = (int)this->x + 0.1;
+			x = std::ceil(this->x) - 0.15;
 			setAnimation("adventurerIdle");
 			std::cout << "nx: " << x << std::endl;
 			std::cout << "--------------------------------" << std::endl;
@@ -60,14 +65,14 @@ void Player::updatePhysics()
 	y += this->movement.y*speed;
 	if (movement.y >= 0) {
 		if (world->getTile(x / 16 + 0.6, y / 16 + 1)->isSolid() ||
-			world->getTile(x / 16 + 0.9, y / 16 + 1)->isSolid()) {
+			world->getTile(x / 16 + 0.7, y / 16 + 1)->isSolid()) {
 			y = (int)y;
 			movement.y = -1;
 		}
 	}
 	else {
 		if (world->getTile(x / 16 + 0.6, y / 16)->isSolid() ||
-			world->getTile(x / 16 + 0.9, y / 16)->isSolid()) {
+			world->getTile(x / 16 + 0.7, y / 16)->isSolid()) {
 			y = (int)y+1;
 		}
 	}
@@ -84,6 +89,8 @@ void Player::render(Camera *c)
 		, x*c->zoom + c->xOffset
 		, y*c->zoom + c->yOffset
 		, width * c->zoom, height * c->zoom, flag);
+	hearts->render();
+
 #if _DEBUG
 	std::pair<int, int> coords = { x*c->zoom + c->xOffset, y*c->zoom + c->yOffset };
 	al_draw_rectangle(coords.first, coords.second,
@@ -135,10 +142,27 @@ Player::Player()
 	y = 158;
 	this->width = 50;//al_get_bitmap_width(texture);
 	this->height = 37;// al_get_bitmap_height(texture);
+	//this->width = 100;
+	//this->height = 74;
 	setAnimation("adventurerIdle", 8);
 }
 
 
 Player::~Player()
 {
+	delete hearts;
+}
+
+Player::heartUI::heartUI() 
+{
+	heartTexture = al_load_bitmap("Images/heart.png");
+	
+	x = al_get_display_width(al_get_current_display()) - (maxLifes*al_get_bitmap_width(heartTexture));
+}
+
+void Player::heartUI::render()
+{
+	for (int i = 0; i < lifes; i++) {
+		al_draw_bitmap(heartTexture, x + (i*al_get_bitmap_width(heartTexture)), 0, 0);
+	}
 }
