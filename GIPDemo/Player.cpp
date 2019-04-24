@@ -9,6 +9,11 @@ void Player::init()
 
 void Player::update()
 {
+	activeState->update(*this);
+}
+
+/*void Player::update()
+{
 	bool idle = true;
 	ALLEGRO_KEYBOARD_STATE KS;
 	al_get_keyboard_state(&KS);
@@ -33,9 +38,9 @@ void Player::update()
 		setAnimationSpeed(8);
 	updatePhysics();
 	updateAnimation();
-}
+}*/
 
-void Player::updatePhysics()
+/*void Player::updatePhysics()
 {
 	float x = this->x;
 	float y = this->y;
@@ -47,11 +52,8 @@ void Player::updatePhysics()
 	if (movement.x > 0) {
 		if (world->getTile((x / 16 + 0.85), (y / 16))->isSolid() ||
 			world->getTile((x / 16 + 0.85), (y / 16 + 0.9))->isSolid()) {
-			std::cout << "x: " << x << std::endl;
 			x = std::ceil(this->x) - 0.15;
 			setAnimation("adventurerIdle");
-			std::cout << "nx: " << x << std::endl;
-			std::cout << "--------------------------------" << std::endl;
 		}
 	}
 	else {
@@ -80,6 +82,7 @@ void Player::updatePhysics()
 	this->x = x;
 	this->y = y;
 }
+*/
 
 void Player::render(Camera *c)
 {
@@ -98,6 +101,11 @@ void Player::render(Camera *c)
 		al_map_rgb(10, 10, 10), 0);
 #endif
 }
+
+/*void Player::render(Camera * c)
+{
+	activeState->render(*this);
+}*/
 
 void Player::placeBlock(ALLEGRO_EVENT event, Camera *c, Inventory *inventory)
 {
@@ -145,6 +153,7 @@ Player::Player()
 	//this->width = 100;
 	//this->height = 74;
 	setAnimation("adventurerIdle", 8);
+	activeState = new IdleState();
 }
 
 

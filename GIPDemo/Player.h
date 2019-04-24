@@ -3,14 +3,20 @@
 #include "VectorMath.h"
 #include "Inventory.h"
 #include "InputManager.h"
+#include "IdleState.h"
 #if _DEBUG
 #include "allegro5/allegro_primitives.h"
 #endif
+
+class IdleState;
 
 class Player
 	: public IAnimation
 {
 private:
+	IState *activeState;
+public:
+	
 	class heartUI {
 	public:
 		ALLEGRO_BITMAP *heartTexture;
@@ -24,7 +30,6 @@ private:
 	Vector movement;
 	float speed;
 	int flag = 0;
-public:
 	heartUI *hearts;
 	World *world;
 	float width, height;
