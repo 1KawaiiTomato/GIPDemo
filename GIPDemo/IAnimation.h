@@ -5,7 +5,7 @@
 
 class IAnimation
 {
-protected:
+public:
 	IAnimation();
 	~IAnimation();
 	void setAnimation(std::string animationName, int speed);
