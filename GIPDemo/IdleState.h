@@ -1,8 +1,8 @@
 #pragma once
 #include "IState.h"
 #include "Player.h"
-#include "CollisionComponent.h"
-#include "CollisionComponent.cpp"
+//#include "CollisionComponent.h"
+//#include "CollisionComponent.cpp"
 
 class Player;
 
