@@ -28,12 +28,12 @@ void World::loadMapCSV(std::string path)
 	
 	//Resize the 2 dimensional vector to fit our world: 
 	//The first number is the width of the world
-	int width = std::stoi(number);
+	width = std::stoi(number);
 	tiles.resize(width);
 
 	//The second number is the height of the world
 	std::getline(file, number, ',');
-	int height = std::stoi(number);
+	height = std::stoi(number);
 	for (int i = 0; i < tiles.size(); i++) {
 		tiles[i].resize(height);
 	}
@@ -79,6 +79,19 @@ void World::render(Camera *c)
 	}*/
 }
 
+void World::saveWorld()
+{
+	std::ofstream out("Data/world.csv");
+	out << width << "," << height << std::endl;
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			out << "," << std::to_string(tiles[x][y]->saveFileId);
+		}
+		out << std::endl;
+	}
+	out.close();
+}
+
 void World::update()
 {
 	monsterManager.update();
@@ -101,6 +114,7 @@ World::World(std::string textureTypesPath)
 		int id = child->IntAttribute("id");
 		std::cout << name << ": " << texture << std::endl;
 		Terrain terr = Terrain(Textures::getInstance().textures[texture], power, solid, name);
+		terr.saveFileId = id;
 		terrainTypes[name] = terr;
 		terrainIDs[id] = name;
 	}

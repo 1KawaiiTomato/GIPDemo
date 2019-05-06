@@ -19,11 +19,11 @@ private:
 	ALLEGRO_EVENT_QUEUE *timerQueue;
 	ALLEGRO_EVENT_QUEUE *EQ;
 	ALLEGRO_DISPLAY *display;
-	World world;
 	Inventory inventory;
 	void register_event_sources();
 	void handleEvents();
 public:
+	World world;
 	void init();
 	void startMain();
 	void render();

@@ -8,6 +8,7 @@
 class World
 {
 private:
+	int width, height;
 	std::vector<std::vector<Terrain*>> tiles;
 	std::unordered_map<int, std::string> terrainIDs;
 public:
@@ -18,6 +19,7 @@ public:
 	Terrain* getTile(int x, int y);
 	MonsterManager monsterManager;
 	void render(Camera *c);
+	void saveWorld();
 	void update();
 	void init();
 	World();

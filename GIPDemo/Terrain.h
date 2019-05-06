@@ -8,6 +8,7 @@ private:
 	int power;
 	bool solid;
 public:
+	int saveFileId;
 	std::string name;
 	float zoom;
 	ALLEGRO_BITMAP* getTexture();
