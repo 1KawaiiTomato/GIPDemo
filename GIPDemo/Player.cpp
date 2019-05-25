@@ -13,22 +13,27 @@ void Player::update()
 	ALLEGRO_KEYBOARD_STATE KS;
 	al_get_keyboard_state(&KS);
 	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_UP]) {
-		this->movement.y -= 2;
-		setAnimation("adventurerJump"); idle = false; 
+		if (onGround) {
+			onGround = false;
+			this->movement.y -= 25;
+			setAnimation("adventurerJump"); idle = false;
+		}
 	}
 	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_LEFT]) {
-		this->movement.x -= 1;
+		this->movement.x -= 0.2;
 		setAnimation("adventurerRun"); idle = false; flag = ALLEGRO_FLIP_HORIZONTAL;
 	}
 	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_RIGHT]) {
-		this->movement.x += 1;
+		this->movement.x += 0.2;
 		setAnimation("adventurerRun"); idle = false; flag = 0;
 	}
 	if (InputManager::isKeyDown[InputManager::keyBindings::MOVE_DOWN]) {
 		setAnimation("adventurerCrouch"); idle = false;
 	}
-	if (idle)
+	if (idle) {
+		this->movement.x = 0;
 		setAnimation("adventurerIdle", 3);
+	}
 	else
 		setAnimationSpeed(8);
 	updatePhysics();
@@ -39,8 +44,7 @@ void Player::updatePhysics()
 {
 	float x = this->x;
 	float y = this->y;
-	movement.y++;
-	movement.normalize();
+	movement.y+=3;
 
 	//X-axis
 	x += this->movement.x*speed;
@@ -50,6 +54,7 @@ void Player::updatePhysics()
 			std::cout << "x: " << x << std::endl;
 			x = std::ceil(this->x) - 0.15;
 			setAnimation("adventurerIdle");
+			movement.x = 0;
 			std::cout << "nx: " << x << std::endl;
 			std::cout << "--------------------------------" << std::endl;
 		}
@@ -58,27 +63,38 @@ void Player::updatePhysics()
 		if (world->getTile((x / 16 + 0.6), (y / 16))->isSolid() ||
 			world->getTile((x / 16 + 0.6), (y / 16 + 0.9))->isSolid()) {
 			x = ((int)this->x) + 0.6;
+			movement.x = 0;
 			setAnimation("adventurerIdle");
 		}
 	}
 	//Y-axis
-	y += this->movement.y*speed;
+	y += this->movement.y*fallSpeed;
 	if (movement.y >= 0) {
 		if (world->getTile(x / 16 + 0.6, y / 16 + 1)->isSolid() ||
 			world->getTile(x / 16 + 0.7, y / 16 + 1)->isSolid()) {
-			y = (int)y;
-			movement.y = -1;
+			//if (!onGround)	std::cout << "Latestss: " << y << std::endl;
+			y = (int)(y - fmod(y,16));
+			//if (!onGround)	std::cout << "Latestss: " << y << "\n-----------" << std::endl;
+			if (movement.y > 35) { this->hearts->lifes -= (int)(movement.y / 20); }
+			movement.y = -3;
+			onGround = true;
+			//speed = 1;
 		}
 	}
 	else {
 		if (world->getTile(x / 16 + 0.6, y / 16)->isSolid() ||
 			world->getTile(x / 16 + 0.7, y / 16)->isSolid()) {
-			y = (int)y+1;
+			y = (int)this->y+1;
 		}
 	}
-	this->movement = Vector(0, movement.y);
+	if (movement.x >= 10)	movement.x = 10;
+	if (movement.x <= -10)	movement.x = -10;
+	this->movement = Vector(movement.x, movement.y);
 	this->x = x;
 	this->y = y;
+	/*if (!onGround) {
+		std::cout << "movementY: " << movement.y << std::endl;
+	}*/
 }
 
 void Player::render(Camera *c)
@@ -137,9 +153,12 @@ void Player::breakBlock(ALLEGRO_EVENT event, Camera * c, Inventory *inventory)
 Player::Player()
 {
 	Textures::getInstance().loadTexturesFromAtlas("Images/player/adventurer.xml");
-	speed = 1;
+	speed = 0.2;
+	fallSpeed = 0.2;
+	//onGround = true;
 	x = 198;
-	y = 158;
+	y = 157;
+	//y = 50;
 	this->width = 50;//al_get_bitmap_width(texture);
 	this->height = 37;// al_get_bitmap_height(texture);
 	//this->width = 100;

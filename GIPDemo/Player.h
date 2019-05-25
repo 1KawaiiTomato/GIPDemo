@@ -23,7 +23,9 @@ private:
 	ALLEGRO_BITMAP *texture;
 	Vector movement;
 	float speed;
+	float fallSpeed;
 	int flag = 0;
+	bool onGround;
 public:
 	heartUI *hearts;
 	World *world;

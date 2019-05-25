@@ -43,14 +43,14 @@ void Camera::update()
 	al_get_keyboard_state(&KS);
 	if (InputManager::isKeyDown[InputManager::keyBindings::ZOOM_IN]) {
 		InputManager::getKeyCode(InputManager::keyBindings::ZOOM_IN);
-		this->zoom += 0.1;
+		this->zoom += 0.5;
 	}
 	if (InputManager::isKeyDown[InputManager::keyBindings::ZOOM_OUT]) {
 		InputManager::getKeyCode(InputManager::keyBindings::ZOOM_OUT);
-		this->zoom -= 0.1;
+		this->zoom -= 0.5;
 	}
 	if (zoom < 0.1) {
-		zoom = 0.1;
+		zoom = 0.5;
 	}
 }
 
@@ -64,7 +64,7 @@ void Camera::init()
 
 Camera::Camera()
 {
-	zoom = 2.5;
+	zoom = 2;
 	camX = xOffset = 0;
 	camY = yOffset = 0;
 }
